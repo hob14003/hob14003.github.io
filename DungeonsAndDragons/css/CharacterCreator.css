@@ -1,0 +1,247 @@
+body {
+    font-family: helvetica;
+}
+
+.nav-tab {
+    font-size: 25px;
+    padding: 5px;
+}
+
+.nav-tab:hover {
+    background-color: gainsboro;
+    color: black;
+}
+
+.nav-tab-active {
+    background-color: #666666;
+    color: white;
+}
+
+hr {
+    background-color: black;
+    border-width: 1px;
+}
+.width-px {
+    width: 150px;
+}
+.width-48 {
+    width: 48%;
+}
+.width-15 {
+    width: 15%;
+}
+.width-25{
+    width: 25%;
+}
+.width-30 {
+    width: 30%;
+}
+.width-40 {
+    width: 40%;
+}
+.width-50 {
+    width: 50%;
+}
+.width-68 {
+    width: 70%;
+}
+.width-75 {
+    width: 75%;
+}
+.line {
+     width: 15%;
+     display: inline-block; 
+}
+
+.stats {
+    display: inline-block; 
+}
+
+.box {
+    height: 50px;
+    display: inline-block;
+    width: 8%;
+}
+
+.box1 {
+    height: 50px;
+    display: inline-block;
+    width: 15%;
+    background-color: white;
+    float: right;
+}
+
+.nav-box {
+    height: 50px;
+    float: left;
+    display: inline-block;
+    width: 8%;
+    background-color: white;
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    background-color: #666666;
+    border-radius: 50%;
+    display: inline-block;
+}
+.heading {
+    width: 8%;
+    display: inline-block;
+}
+
+.heading1 {
+    width: 15%;
+    display: inline-block;
+    color: white;
+}
+
+.heading2 {
+    margin-bottom: 0px;
+    display: inline-block;
+    color: white;
+}
+.heading3 {
+    margin-bottom: 0px;
+    color: white;
+}
+.disabled {
+   color: grey; 
+}
+.align-right {
+    text-align:right;
+}
+.headingLeft {
+    font-size: 13px;
+}
+
+.skill-level {
+    display: inline-block;
+    width: 20px;
+}
+
+.skill {
+    font-size: 13px;
+    display: inline-block;
+}
+
+.background-info {
+    list-style-type: circle;
+    margin-left: 10%;
+    font-size: 13px;
+}
+
+#column-3 {
+    display: inline-block;   
+}
+
+.tab {
+    background-color: #666666;
+    padding: 5px;
+}
+.race-group {
+    display: inline-block;
+    width: 19.5%
+}
+.background-group {
+    margin: 5px;
+    display: inline-block;
+    width: 15%
+}
+
+#nameInput, .margin-5 {
+    margin: 5px;
+}
+
+#nameInput {
+    margin-top: -5px;
+}
+.class-group {
+    margin: 5px;
+    display: inline-block;
+    width: 13%
+}
+.proficiencies-group {
+    display: inline-block;
+    width: 30%;
+}
+.cantrip-group {
+    display: inline-block;
+    width: 49%;
+}
+.spell-group {
+    display: inline-block;
+    width: 24.5%;
+}
+#cantrips {
+    border-right: solid;
+    margin-right: 10px;
+}
+.full-width {
+    width: 100%;
+}
+.hide {
+   display: none; 
+}
+
+.skill-row {
+    margin-bottom: -15px;
+}
+
+.cantripsSpellsEct-row {
+    margin-bottom: -15px;
+    visibility: hidden;
+}
+
+.btn-white {
+    background-color: white;
+}
+
+.btn-white:hover {
+    background-color: whitesmoke;
+}
+
+.fa-circle, .fa-circle-o {
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+span, text-white {
+    color: white;
+}
+
+.equipment-by-class {
+    display: none;
+}
+
+.image {
+    width: 60%;
+    display: inline-block;
+}
+
+.dts {
+    width: 30%;
+    margin-left: 10px;
+}
+
+.boxBig {
+    display: inline-block;
+    width: 24%;
+    height: 475px;
+    margin-right: 10px;
+}
+
+.header5 {
+    display: inline-block;
+    width: 24%;
+    margin-right: 6px;
+}
+
+.center-text {
+     text-align: center;
+}
+
+#equip {
+    height: 245px;
+}

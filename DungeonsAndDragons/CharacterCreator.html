@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://getbootstrap.com/docs/4.0/examples/navbars/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+
+    <title>Character Creator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/navbar.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="css/CharacterCreator.css">
+    <script src="javascript/CharacterCreator.js"></script>
+    <script src="javascript/background.js"></script>
+    <script src="javascript/class.js"></script>
+    <script src="javascript/attackSpellcasting.js"></script>
+  </head>
+
+  <body onload="onLoadMethod()">
+
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <h3 class="nav-tab" onclick="showTab(this, 'abilityScores')">Ability Scores</h3>
+            </li>
+            <li class="nav-item">
+             <h3 class="nav-tab" onclick="showTab(this, 'race')">Race</h3>
+            </li>
+            <li class="nav-item">
+              <h3 class="nav-tab" onclick="showTab(this, 'background')">Background/Personality</h3>
+            </li>
+            <li class="nav-item">
+              <h3 class="nav-tab" onclick="showTab(this, 'class')">Class</h3>
+            </li>
+            <li class="nav-item">
+              <h3 class="nav-tab" onclick="showTab(this, 'proficiencies')">Proficiencies</h3>
+            </li>
+            <li class="nav-item">
+              <h3 class="nav-tab" onclick="showTab(this, 'attackSpellcasting')">Attack &amp; Spellcasting</h3>
+            </li>
+          </ul>
+            <div class="ml-auto p-2"> 
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <h3 class="nav-tab" onclick="showTabHome(this)"><i class="fa fa-home" style="font-size:36px"></i></h3>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </nav>
+    <div id="abilityScores-tab" class="tab hide">
+        <div class="stats width-48"></div>
+        <div class="stats width-50 align-right"> 
+            <p class="heading1">Strength</p>
+            <p class="heading1">Dexterity</p>
+            <p class="heading1">Constitution</p>
+            <p class="heading1">Inteligence</p>
+            <p class="heading1">Wisdom</p>
+            <p class="heading1">Charisma</p>
+        </div>
+        <div class="stats width-48">
+            <img src="images/dice2.png" width="50" onclick="rollDice();" style="float: left">
+            <div class="border border-dark nav-box" id="random-stat-1-parentNode">
+                <p id="random-stat-1" draggable="true" ondragstart="drag(event)"></p>
+            </div>
+            <div class="border border-dark nav-box" id="random-stat-2-parentNode">
+                <p id="random-stat-2" draggable="true" ondragstart="drag(event)"></p>
+            </div>
+            <div class="border border-dark nav-box"
+            id="random-stat-3-parentNode">
+                <p id="random-stat-3" draggable="true" ondragstart="drag(event)"></p>
+            </div>
+            <div class="border border-dark nav-box"
+            id="random-stat-4-parentNode">
+                <p id="random-stat-4" draggable="true" ondragstart="drag(event)"></p>
+             </div>
+            <div class="border border-dark nav-box"
+            id="random-stat-5-parentNode">
+                <p id="random-stat-5" draggable="true" ondragstart="drag(event)"></p>
+             </div>
+            <div class="border border-dark nav-box"
+            id="random-stat-6-parentNode">
+                <p id="random-stat-6" draggable="true" ondragstart="drag(event)"></p>
+            </div>
+        </div>
+        <div class="stats width-50 align-right">
+            <div id="charisma-selection-box" class="border border-dark box1" ondrop="drop(event);" ondragover="allowDrop(event)">
+            </div>
+            <div id="wisdom-selection-box" class="border border-dark box1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </div>
+            <div id="inteligence-selection-box" class="border border-dark box1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </div>
+            <div id="constitution-selection-box" class="border border-dark box1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </div>
+            <div id="dexterity-selection-box" class="border border-dark box1" ondrop="drop(event)" ondragover="allowDrop(event)"> 
+            </div>
+            <div id="strength-selection-box" class="border border-dark box1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </div>
+        </div>
+    </div>
+        
+    <div id="race-tab" class="tab hide">
+        <div class="margin-5">
+            <div class="race-group">
+                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'button');" style="background-color: #99ffcc">Dragonborn</button>
+            </div>
+            <div class="race-group">
+                <select class="form-control" onfocus="selectThisRace(this, 'select');" onchange="selectThisRaceFromSelect(this)">
+                    <optgroup label="Elf">
+                        <option>Dark Elf</option>
+                        <option>High Elf</option>
+                        <option>Wood Elf</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="race-group">
+                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'button');">Half-Elf</button>
+            </div>
+            <div class="race-group">
+                <select class="form-control" onfocus="selectThisRace(this);" onchange="selectThisRaceFromSelect(this)">
+                    <optgroup label="Halfling">
+                        <option>Halfling: Lightfoot</option>
+                        <option>Halfling: Stout</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="race-group">
+                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'button');">Tiefling</button>
+            </div>
+        </div>
+         <div class="margin-5">
+         <div class="race-group">
+                <select class="form-control" onfocus="selectThisRace(this);" onchange="selectThisRaceFromSelect(this)">
+                    <optgroup label="Dwarf">
+                        <option>Hill Dwarf</option>
+                        <option>Mountain Dwarf</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="race-group">
+                <select class="form-control" onfocus="selectThisRace(this);" onchange="selectThisRaceFromSelect(this)">
+                    <optgroup label="Gnome">
+                        <option>Forest Gnome</option>
+                        <option>Rock Gnome</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="race-group">
+                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'button');">Half-Orc</button>
+            </div>
+             <div class="race-group">
+                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'button');">Human</button>
+            </div>
+             <div class="race-group">
+                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'Random');">Random</button>
+            </div>
+        </div>
+    </div>
+    <div id="background-tab" class="tab hide">
+        <div>
+            <div class="background-group">
+                <select class="form-control" id="selectBackground" onchange="changeBackgroundValues(this)">
+                    <optgroup label="Background">
+                        <option id="acolyte">Acolyte</option>
+                        <option>Charlatan</option>
+                        <option>Criminal</option>
+                        <option>Entertainer</option>
+                        <option>Folk Hero</option>
+                        <option>Guild Artisan</option>
+                        <option>Hermit</option>
+                        <option>Noble</option>
+                        <option>Outlander</option>
+                        <option>Sage</option>
+                        <option>Sailor</option>
+                        <option>Soldier</option>
+                        <option>Urchin</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="background-group">
+                <select class="form-control" id="selectPersonalityTrait" onchange="updateBackground(this, 'personalityTrait')">
+                    <optgroup label="Personality Trait">
+                        <option id="pt-1">I idolize a particular hero of my faith, and constantly refer to that person's deeds and example.</option>
+                        <option id="pt-2">I can find common ground between the fiercest enemies, epathizing with them and always working toward peace.</option>
+                        <option id="pt-3">I see omens in every event and action. The gods try to speak to us, we just need to listen.</option>
+                        <option id="pt-4">Nothing can shake my optimistic attitude.</option>
+                        <option id="pt-5">I quote (or misquote) sacred texts ad proverbs in most every situtation.</option>
+                        <option id="pt-6">I am tolerant (or intolerant) of other faiths and respect (or condemn) the worship of other gods.</option>
+                        <option id="pt-7">I've enjoyed fine food, drink, and high society among my temple's elite. Rough living grates on me.</option>
+                        <option id="pt-8">I've spent so long in the temple that I jve little practival experience dealing with people in the outside world.</option>
+                    </optgroup>
+                </select>
+             </div>
+            <div class="background-group">
+                 <select class="form-control" id="selectIdeal" onchange="updateBackground(this, 'ideal')">
+                     <optgroup label="Ideal">
+                        <option id="i-1">Tradition</option>
+                        <option id="i-2">Charity</option>
+                        <option id="i-3">Change</option>
+                        <option id="i-4">Power</option>
+                        <option id="i-5">Faith</option>
+                        <option id="i-6">Aspiration</option>
+                     </optgroup>
+                </select>
+             </div>
+            <div class="background-group">
+                 <select class="form-control" id="selectBond" onchange="updateBackground(this, 'bond')">
+                     <optgroup label="Bond">
+                        <option id="b-1">I would die to recover an ancient relic of my faith that was lost long ago.</option>
+                        <option id="b-2">I will someday get revenge on the corrupt temple hierarchy who branded me a heretic.</option>
+                        <option id="b-3">I owe my life to the priest who took me in when my parents died.</option>
+                        <option id="b-4">Everything I do is for the common people.</option>
+                        <option id="b-5">I will do anything to protect the temple where I served.</option>
+                        <option id="b-6">I seek to preserve a sacred text that my enemies consider heretical and seek to destroy.</option>
+                     </optgroup>
+                </select>
+             </div>
+            <div class="background-group">
+                 <select class="form-control" id="selectFlaw" onchange="updateBackground(this, 'flaw')">
+                     <optgroup label="Flaw">
+                        <option id="f-1">I judge others harshly, and myself even more severly.</option>
+                        <option id="f-2">I put too much trust in those who weild power within my temple's hierarchy.</option>
+                        <option id="f-3">My piety sometimes leads me to blindy trust those that profess faith in my god.</option>
+                        <option id="f-4">I'm inflexible in my thinking.</option>
+                        <option id="f-5">I am suspicious of strangers and expect the worst of them.</option>
+                        <option id="f-6">Once I pick a goal, I become obsessed with it to the detriment of everything else in my life.</option>
+                     </optgroup>
+                </select>
+             </div>
+            <div class="background-group">
+                 <select class="form-control" id="selectAlignment" onchange="fillAlignment(this)">
+                     <optgroup label="Alignment">
+                        <option>Chaotic Good</option>
+                        <option>Chaotic Neutral</option>
+                        <option>Chaotic Evil</option>
+                        <option>Neutral Good</option>
+                        <option>Neutral</option>
+                        <option>Neutral Evil</option>
+                        <option>Lawful Good</option>
+                        <option>Lawful Neutral</option>
+                        <option>Lawful Evil</option>
+                     </optgroup>
+                </select>
+            </div>
+        </div>
+        <div>
+            <div class="background-group">
+                <p class="heading1 margin-5" >Name</p>
+                <input class="form-control" oninput="fillName(this)" id="nameInput">
+            </div>
+            <div class="background-group"></div>
+            <div class="background-group"></div>
+            <div class="background-group"></div>
+            <div class="background-group"></div>
+            <div class="background-group">
+                <button class="btn btn-white full-width margin-5" onclick="getRandomBackground()">Random</button>
+            </div>
+        </div>
+    </div>
+      <div id="class-tab" class="tab hide">
+          <div>
+            <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)" style="background-color: #99ffcc">Barbarian</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Cleric</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Fighter</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Paladin</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Rogue</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Warlock</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Random</button>
+            </div>
+          </div>
+          <div>
+          <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Bard</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Druid</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Monk</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Ranger</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Sorcerer</button>
+            </div>
+              <div class="class-group">
+                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Wizard</button>
+            </div>
+            <div class="class-group">
+            </div>
+          </div>
+        </div>
+        
+         <div id="proficiencies-tab" class="tab hide">
+            <p class="heading2" id="prof-instructions">Choose two addtional skills:</p>
+            <p class="heading2" id="prof-warning" style="color:#99ffcc;visibility:hidden">More than the recomended number of skills selected!</p>
+            <div class="width-50">
+                <div class="proficiencies-group">
+                    <div class="form-check prof-skill" id="prof-acrobatics">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'acrobatics')" value="acrobatics" disabled><p class="heading2 disabled" >Acrobatics</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-animalHandling">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'animalHandling')" value="animalHandling"><p class="heading2">Animal Handling</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-arcana">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'arcana')" value="arcana" disabled><p class="heading2 disabled">Arcana</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-athletics">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'athletics')" value="athletics"><p class="heading2 ">Athletics</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-deception">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'deception')" value="deception" disabled><p class="heading2 disabled">Deception</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-history">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'history')" value="history" disabled><p class="heading2 disabled">History</p>
+                    </div>
+                </div>
+                <div class="proficiencies-group">
+                    <div class="form-check prof-skill" id="prof-insight">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'insight')" value="insight" checked disabled><p class="heading2">Insight</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-intimidation">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'intimidation')" value="intimidation"><p class="heading2">Intimidation</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-investigation">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'investigation')" value="investigation" disabled><p class="heading2 disabled">Investigation</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-medicine">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'medicine')" value="medicine" disabled><p class="heading2 disabled">Medicine</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-nature">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'nature')" value="nature"><p class="heading2">Nature</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-perception">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'perception')" value="perception"><p class="heading2">Perception</p>
+                    </div>
+                </div>
+                <div class="proficiencies-group">
+                    <div class="form-check prof-skill" id="prof-performance">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'performance')" value="performance" disabled><p class="heading2 disabled">Performance</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-persuasion">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'persuasion')" value="persuasion" disabled><p class="heading2 disabled">Pursuasion</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-religion">
+                         <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'religion')" value="religion" checked disabled><p class="heading2" >Religion</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-slightOfHand">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'slightOfHand')" value="slightOfHand" disabled><p class="heading2 disabled">Slight of Hand</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-stealth">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'stealth')" value="stealth" disabled><p class="heading2 disabled">Stealth</p>
+                    </div>
+                    <div class="form-check prof-skill" id="prof-survivial">
+                        <input class="form-check-input" type="checkbox" onchange="selectSkill(this, 'survivial')" value="survivial"><p class="heading2">Survival</p>
+                    </div>
+                    
+                </div>
+            </div> 
+            <div>
+             
+            </div>
+        </div>
+        <div id="attackSpellcasting-tab" class="tab hide">
+            <div id="cantrips" class="stats width-25">
+             <p class="heading2" id="cantrip-instructions">There are no cantrips for this class:</p>
+            <p class="heading2" id="cantrip-warning" style="color:#99ffcc;display: none">More than the recomended number of cantrips selected!</p>
+            <div>
+                <div class="cantrip-group">
+                    <div class="form-check cantrip-skill" id="cantrip-acidSplash">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="acidSplash" disabled><p class="heading2 disabled">Acid Splash</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-bladeWard">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="bladeWard" disabled><p class="heading2 disabled">Blade Ward</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-chillTouch">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="chillTouch" disabled><p class="heading2 disabled">Chill Touch</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-dancingLights">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="dancingLights" disabled><p class="heading2 disabled">Dancing Lights</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-druidcraft">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="druidcraft" disabled><p class="heading2 disabled">Druidcraft</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-eldritchBlast">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="eldritchBlast" disabled><p class="heading2 disabled">Eldritch Blast</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-fireBolt">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="fireBolt" disabled><p class="heading2 disabled">Fire Bolt</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-friends">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="friends" disabled><p class="heading2 disabled">Friends</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-guidance">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="guidance" disabled><p class="heading2 disabled">Guidance</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-light">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="light" disabled><p class="heading2 disabled">Light</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-mageHand">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="mageHand" disabled><p class="heading2 disabled">Mage Hand</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-mending">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="mending" disabled><p class="heading2 disabled">Mending</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-message">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="message" disabled><p class="heading2 disabled">Message</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-minorIllusion">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="minorIllusion" disabled><p class="heading2 disabled">Minor Illusion</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-poisonSpray">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="poisonSpray" disabled><p class="heading2 disabled">Poison Spray</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-prestidigitation">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="prestidigitation" disabled><p class="heading2 disabled">Prestidigitation</p>
+                    </div>
+                </div>
+                <div class="cantrip-group">
+                    <div class="form-check cantrip-skill" id="cantrip-produceFlame">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="produceFlame" disabled><p class="heading2 disabled">Produce Flame</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-rayOfFrost">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="rayOfFrost" disabled><p class="heading2 disabled">Ray of Frost</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-resistance">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="resistance" disabled><p class="heading2 disabled">Resistance</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-sacredFlame">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="sacredFlame" disabled><p class="heading2 disabled">Sacred Flame</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-shillelagh">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="shillelagh" disabled><p class="heading2 disabled">Shillelagh</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-shockingGrasp">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="shockingGrasp" disabled><p class="heading2 disabled">Shocking Grasp</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-spareTheDying">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="spareTheDying" disabled><p class="heading2 disabled">Spare the Dying</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-thaumaturgy">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="thaumaturgy" disabled><p class="heading2 disabled">Thaumaturgy</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-thornWhip">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="thornWhip" disabled><p class="heading2 disabled">Thorn Whip</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-trueStrike">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="trueStrike" disabled><p class="heading2 disabled">True Strike</p>
+                    </div>
+                    <div class="form-check cantrip-skill" id="cantrip-viciousMockery">
+                        <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="viciousMockery" disabled><p class="heading2 disabled">Vicious Mockery</p>
+                    </div>
+                    <div class="form-check" style="visibility: hidden">
+                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
+                    </div>
+                    <div class="form-check" style="visibility: hidden">
+                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
+                    </div>
+                </div>
+            </div> 
+            </div>
+            <div id="spells" class="stats width-68">
+             <p class="heading2" id="spell-instructions">There are no spells for this class:</p>
+            <p class="heading2" id="spell-warning" style="color:#99ffcc;visibility: hidden;">More than the recomended number of spells selected!</p>
+            <div>
+                <div class="spell-group">
+                    <div class="form-check spell-skill" id="spell-alarm">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="alarm" disabled><p class="heading2 disabled">Alarm</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-animalFriendship">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="animalFriendship" disabled><p class="heading2 disabled">Animal Friendship</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-armorOfAgathys">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="armorOfAgathys" disabled><p class="heading2 disabled">Armor of Agathys</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-armsOfHadar">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="armsOfHadar" disabled><p class="heading2 disabled">Arms of Hadar</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-bane">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="bane" disabled><p class="heading2 disabled">Bane</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-bless">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="bless" disabled><p class="heading2 disabled">Bless</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-burningHands">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="burningHands" disabled><p class="heading2 disabled">Burning Hands</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-charmPerson">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="charmPerson" disabled><p class="heading2 disabled">Charm Person</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-chromaticOrb">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="chromaticOrb" disabled><p class="heading2 disabled">Chromatic Orb</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-colorSpray">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="colorSpray" disabled><p class="heading2 disabled">Color Spray</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-command">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="command" disabled><p class="heading2 disabled">Command</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-comprehendLanguages">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="comprehendLanguages" disabled><p class="heading2 disabled">Comprehend Languages</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-createOrDestroyWater">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="createOrDestroyWater" disabled><p class="heading2 disabled">Create/Destroy water</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-cureWounds">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="cureWounds" disabled><p class="heading2 disabled">Cure Wounds</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-detectEvilAndGood">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="detectEvilAndGood" disabled><p class="heading2 disabled">Detect Evil and Good</p>
+                    </div>
+                </div>
+                <div class="spell-group">
+                    <div class="form-check spell-skill" id="spell-detectMagic">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="detectMagic" disabled><p class="heading2 disabled">Detect Magic</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-detectPoisonAndDisease">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="detectPoisonAndDisease" disabled><p class="heading2 disabled">Detect Poison and Disease</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-disguiseSelf">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="disguiseSelf" disabled><p class="heading2 disabled">Disguise Self</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-dissonantWhispers">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="dissonantWhispers" disabled><p class="heading2 disabled">Dissonant Whispers</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-entangle">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="entangle" disabled><p class="heading2 disabled">Entangle</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-expeditiousRetreat">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="expeditiousRetreat" disabled><p class="heading2 disabled">Expeditious Retreat</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-faerieFire">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="faerieFire" disabled><p class="heading2 disabled">Faerie Fire</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-falseLife">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="falseLife" disabled><p class="heading2 disabled">False Life</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-featherFall">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="featherFall" disabled><p class="heading2 disabled">Feather Fall</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-findFamiliar">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="findFamiliar" disabled><p class="heading2 disabled">Find Familiar</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-fogCloud">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="fogCloud" disabled><p class="heading2 disabled">Fog Cloud</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-goodberry">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="goodberry" disabled><p class="heading2 disabled">Goodberry</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-grease">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="grease" disabled><p class="heading2 disabled">Grease</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-guidingBolt">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="guidingBolt" disabled><p class="heading2 disabled">Guiding Bolt</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-healingWord">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="healingWord" disabled><p class="heading2 disabled">Healing Word</p>
+                    </div>
+                </div>
+                <div class="spell-group">
+                    <div class="form-check spell-skill" id="spell-hellishRebuke">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="hellishRebuke" disabled><p class="heading2 disabled">Hellish Rebuke</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-heroism">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="heroism" disabled><p class="heading2 disabled">Heroism</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-hex">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="hex" disabled><p class="heading2 disabled">Hex</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-identify">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="identify" disabled><p class="heading2 disabled">Identify</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-illusoryScript">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="illusoryScript" disabled><p class="heading2 disabled">Illusory Script</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-inflictWounds">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="inflictWounds" disabled><p class="heading2 disabled">Inflict Wounds</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-jump">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="jump" disabled><p class="heading2 disabled">Jump</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-longstrider">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="longstrider" disabled><p class="heading2 disabled">Longstrider</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-mageArmor">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="mageArmor" disabled><p class="heading2 disabled">Mage Armor</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-magicMissile">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="magicMissile" disabled><p class="heading2 disabled">Magic Missile</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-protectionFromEvilAndGood">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="protectionFromEvilAndGood" disabled><p class="heading2 disabled">Protection from Evil and Good</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-purifyFoodAndDrink">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="purifyFoodAndDrink" disabled><p class="heading2 disabled">Purify Food and Drink</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-rayOfSickness">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="rayOfSickness" disabled><p class="heading2 disabled">Ray of Sickness</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-sanctuary">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="sanctuary" disabled><p class="heading2 disabled">Sanctuary</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-shield">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="shield" disabled><p class="heading2 disabled">Shield</p>
+                    </div>
+                </div>
+                <div class="spell-group">
+                    <div class="form-check spell-skill" id="spell-shieldOfFaith">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="shieldOfFaith" disabled><p class="heading2 disabled">Shield of Faith</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-silentImage">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="silentImage" disabled><p class="heading2 disabled">Silent Image</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-sleep">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="sleep" disabled><p class="heading2 disabled">Sleep</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-speakWithAnimals">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="speakWithAnimals" disabled><p class="heading2 disabled">Speak with Animals</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-tashasHideousLaughter">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="tashasHideousLaughter" disabled><p class="heading2 disabled">Tasha's Hideous Laughter</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-tensersFloatingDisk">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="tensersFloatingDisk" disabled><p class="heading2 disabled">Tenser's Floating Disk</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-thunderwave">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="thunderwave" disabled><p class="heading2 disabled">Thunderwave</p>
+                    </div>
+                   <div class="form-check spell-skill" id="spell-unseenServant">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="unseenServant" disabled><p class="heading2 disabled">Unseen Servant</p>
+                    </div>
+                    <div class="form-check spell-skill" id="spell-witchBolt">
+                        <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="witchbolt" disabled><p class="heading2 disabled">Witch Bolt</p>
+                    </div>
+                    <div class="form-check" style="visibility: hidden">
+                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
+                    </div>
+                    <div class="form-check" style="visibility: hidden">
+                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
+                    </div>
+                    <div class="form-check" style="visibility: hidden">
+                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
+                    </div>
+                    <div class="form-check" style="visibility: hidden">
+                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
+                    </div>
+                    <div class="form-check" style="visibility: hidden">
+                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
+                    </div>
+                    <div class="form-check" style="visibility: hidden">
+                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
+                    </div>
+                </div>
+            </div> 
+            </div>
+            <div id="equipment">
+                <br>
+                <div id="barbarian-equipment" class="equipment-by-class">
+                    <div id="barbarian-option-1">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="barbarian-option-1" value="Greataxe" checked
+                                   onchange="selectWeapon('barbarian-martial-melee-select', this, 1)"><span>Greataxe</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="barbarian-option-1" 
+                                       value="Battleaxe" onchange="selectWeaponOption('barbarian-martial-melee-select', this, 1)"><span>Martial Melee Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1);" id="barbarian-martial-melee-select" disabled>
+                                <optgroup label="Martial Melee Weapon">
+                                    <option>Battleaxe</option>
+                                    <option>Flail</option>
+                                    <option>Glaive</option>
+                                    <option>Greateaxe</option>
+                                    <option>Greatsword</option>
+                                    <option>Halberd</option>
+                                    <option>Lance</option>
+                                    <option>Longsword</option>
+                                    <option>Maul</option>
+                                    <option>Morningstar</option>
+                                    <option>Rapier</option>
+                                    <option>Scimitar</option>
+                                    <option>Shortsword</option>
+                                    <option>Trident</option>
+                                    <option>War pick</option>
+                                    <option>Warhammer</option>
+                                    <option>Whip</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                      <div id="barbarian-option-2">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="barbarian-option-2" value="Handaxe(2)" checked
+                                   onchange="selectWeapon('barbarian-simple-weapon-select', this, 2)"><span>Handaxe (2)</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="barbarian-option-2" value="Crossbow, light" onchange="selectWeaponOption('barbarian-simple-weapon-select', this, 2)"><span>Simple Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2)" id="barbarian-simple-weapon-select" disabled>
+                                <optgroup label="Simple Ranged Weapon">
+                                    <option>Crossbow, light</option>
+                                    <option>Dart</option>
+                                    <option>Shortbow</option>
+                                    <option>Sling</option>
+                                </optgroup>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="barbarian-option-3">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Explorer's Pack</li>
+                            <li>Javelin (4)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="bard-equipment" class="equipment-by-class">
+                    <div id="bard-option-1">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="bard-option-1" value="Rapier" checked
+                                   onchange="selectWeapon('bard-simple-weapon-select', this, 1)"><span>Rapier</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="bard-option-1" value="Longsword"
+                                   onchange="selectWeapon('bard-simple-weapon-select', this, 1)"><span>Longsword</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="bard-option-1" value="Crossbow, light" onchange="selectWeaponOption('bard-simple-weapon-select', this, 1)"><span>Simple Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="bard-simple-weapon-select" disabled>
+                                <optgroup label="Simple Ranged Weapon">
+                                    <option>Crossbow, light</option>
+                                    <option>Dart</option>
+                                    <option>Shortbow</option>
+                                    <option>Sling</option>
+                                </optgroup>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="bard-option-2">
+                        <p class="heading3">Choose one of the following packs:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="bard-option-2" value="Diplomat's Pack" checked
+                                   onchange="updateEquipmentList(this.value, 2)()"><span>Diplomat's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="bard-option-2" value="Entertainer's Pack"
+                                   onchange="updateEquipmentList(this.value, 2)"><span>Entertainer's Pack</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="bard-option-3">
+                        <p class="heading3">Choose one of the following instruments:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="bard-option-3" value="Lute" checked
+                                   onchange="updateEquipmentList(this.value, 3)"><span>Lute</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="bard-option-3" value="Other Instrument"
+                                   onchange="updateEquipmentList(this.value, 3)"><span>Other Instument</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="bard-option-4">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Leather Armor</li>
+                            <li>Dagger</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="cleric-equipment" class="equipment-by-class">
+                    <div id="cleric-option-1">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="cleric-option-1" value="Light crossbow, bolts (20) " checked
+                                   onchange="selectWeapon('cleric-simple-weapon-select', this, 1)"><span>Light crossbow, bolts (20)</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="cleric-option-1" value="Crossbow, light" onchange="selectWeaponOption('cleric-simple-weapon-select', this, 1)"><span>Simple Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="cleric-simple-weapon-select" disabled>
+                                <optgroup label="Simple Ranged Weapon">
+                                    <option>Crossbow, light</option>
+                                    <option>Dart</option>
+                                    <option>Shortbow</option>
+                                    <option>Sling</option>
+                                </optgroup>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="cleric-option-2">
+                        <p class="heading3">Choose one of the following types of armor:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="cleric-option-2" value="Scale Mail" checked
+                                   onchange="updateEquipmentList(this.value, 2)()"><span>Scale Mail</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="cleric-option-2" value="Leather Armor"
+                                   onchange="updateEquipmentList(this.value, 2)"><span>Leather Armor</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="cleric-option-3">
+                        <p class="heading3">Choose one of the following packs:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="cleric-option-3" value="Priest's Pack" checked
+                                   onchange="updateEquipmentList(this.value, 3)()"><span>Priest's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="cleric-option-3" value="Explorer's Pack"
+                                   onchange="updateEquipmentList(this.value, 3)"><span>Explorer's Pack</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="cleric-option-4">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Shield</li>
+                            <li>Holy Symbol</li>
+                            <li>Mace</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="druid-equipment" class="equipment-by-class">
+                    <div id="druid-option-1">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="druid-option-1" value="Shield" checked
+                                   onchange="selectWeapon('druid-simple-weapon-select', this, 1)"><span>Shield</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="druid-option-1" value="Crossbow, light" onchange="selectWeaponOption('druid-simple-weapon-select', this, 1)"><span>Simple Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="druid-simple-weapon-select" disabled>
+                                <optgroup label="Simple Ranged Weapon">
+                                    <option>Crossbow, light</option>
+                                    <option>Dart</option>
+                                    <option>Shortbow</option>
+                                    <option>Sling</option>
+                                </optgroup>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="druid-option-2">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="druid-option-2" value="Scimitar" checked
+                                   onchange="selectWeapon('druid-martial-melee-select', this, 2)"><span>Scimitar</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="druid-option-2" 
+                                       value="Battleaxe" onchange="selectWeaponOption('druid-martial-melee-select', this, 2)"><span>Martial Melee Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="druid-martial-melee-select" disabled>
+                                <optgroup label="Martial Melee Weapon">
+                                    <option>Battleaxe</option>
+                                    <option>Flail</option>
+                                    <option>Glaive</option>
+                                    <option>Greateaxe</option>
+                                    <option>Greatsword</option>
+                                    <option>Halberd</option>
+                                    <option>Lance</option>
+                                    <option>Longsword</option>
+                                    <option>Maul</option>
+                                    <option>Morningstar</option>
+                                    <option>Rapier</option>
+                                    <option>Scimitar</option>
+                                    <option>Shortsword</option>
+                                    <option>Trident</option>
+                                    <option>War pick</option>
+                                    <option>Warhammer</option>
+                                    <option>Whip</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="druid-option-3">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Leather Armor</li>
+                            <li>Explorer's Pack</li>
+                            <li>Druidic Focus</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="fighter-equipment" class="equipment-by-class">
+                    <div id="fighter-option-1">
+                        <p class="heading3">Choose one of the following types of armor/equipment:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="fighter-option-1" value="Chain Mail" checked onchange="updateEquipmentList(this.value, 1)()"><span>Chain Mail</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="fighter-option-1" value="Leather Armor, longbox, arrows (20)"
+                                   onchange="updateEquipmentList(this.value, 1)"><span>Leather Armor, longbow, arrows (20) </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="fighter-option-2">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <span>Martial Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="fighter-martial-weapon-select-1">
+                                <optgroup label="Martial Ranged Weapon">
+                                    <option>Blowgun</option>
+                                    <option>Crossbow, hand</option>
+                                    <option>Crossbow, heavy</option>
+                                    <option>Longbow</option>
+                                    <option>Net</option>
+                                </optgroup>
+                                <optgroup label="Martial Melee Weapon">
+                                    <option>Battleaxe</option>
+                                    <option>Flail</option>
+                                    <option>Glaive</option>
+                                    <option>Greateaxe</option>
+                                    <option>Greatsword</option>
+                                    <option>Halberd</option>
+                                    <option>Lance</option>
+                                    <option>Longsword</option>
+                                    <option>Maul</option>
+                                    <option>Morningstar</option>
+                                    <option>Rapier</option>
+                                    <option>Scimitar</option>
+                                    <option>Shortsword</option>
+                                    <option>Trident</option>
+                                    <option>War pick</option>
+                                    <option>Warhammer</option>
+                                    <option>Whip</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="fighter-option-3">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="fighter-option-3" value="Shield" checked
+                                   onchange="selectWeapon('fighter-martial-weapon-select-2', this, 3)"><span>Shield</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="fighter-option-3" 
+                                       value="Blowgun" onchange="selectWeaponOption('fighter-martial-weapon-select-2', this, 3)"><span>Martial Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 3);" id="fighter-martial-weapon-select-2" disabled>
+                                <optgroup label="Martial Ranged Weapon">
+                                    <option>Blowgun</option>
+                                    <option>Crossbow, hand</option>
+                                    <option>Crossbow, heavy</option>
+                                    <option>Longbow</option>
+                                    <option>Net</option>
+                                </optgroup>
+                                <optgroup label="Martial Melee Weapon">
+                                    <option>Battleaxe</option>
+                                    <option>Flail</option>
+                                    <option>Glaive</option>
+                                    <option>Greateaxe</option>
+                                    <option>Greatsword</option>
+                                    <option>Halberd</option>
+                                    <option>Lance</option>
+                                    <option>Longsword</option>
+                                    <option>Maul</option>
+                                    <option>Morningstar</option>
+                                    <option>Rapier</option>
+                                    <option>Scimitar</option>
+                                    <option>Shortsword</option>
+                                    <option>Trident</option>
+                                    <option>War pick</option>
+                                    <option>Warhammer</option>
+                                    <option>Whip</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="fighter-option-4">
+                        <p class="heading3">Choose one of the following types of armor/equipment:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="fighter-option-4" value="Light crossbow, bolts (20)" checked onchange="updateEquipmentList(this.value, 4)()"><span>Light crossbow, bolts (20)</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="fighter-option-4" value="Handaxe (2)"
+                                   onchange="updateEquipmentList(this.value, 4)"><span>Handaxe (2)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="fighter-option-5">
+                        <p class="heading3">Choose one of the following packs:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="fighter-option-5" value="Explorer's Pack" checked onchange="updateEquipmentList(this.value, 5)()"><span>Explorer's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="fighter-option-5" value="Dungoneer's Pack"
+                                   onchange="updateEquipmentList(this.value, 5)"><span>Dungoneer's Pack</span>
+                            </label>
+                        </div>
+                    </div> 
+                </div>
+                <div id="monk-equipment" class="equipment-by-class">
+                    <div id="monk-option-1">
+                        <p class="heading3">Choose one of the following packs:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="monk-option-1" value="Explorer's Pack" checked onchange="updateEquipmentList(this.value, 1)()"><span>Explorer's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="monk-option-1" value="Dungeoneer's Pack"
+                                   onchange="updateEquipmentList(this.value, 1)"><span>Dungeoneer's Pack</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="monk-option-2">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="monk-option-2" value="Shortsword" checked
+                                   onchange="selectWeapon('monk-simple-weapon-select', this, 2)"><span>Shortsword</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="monk-option-2" 
+                                       value="Crossbow, light" onchange="selectWeaponOption('monk-simple-weapon-select', this, 2)"><span>Simple Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="monk-simple-weapon-select" disabled>
+                                <optgroup label="Simple Ranged Weapon">
+                                    <option>Crossbow, light</option>
+                                    <option>Dart</option>
+                                    <option>Shortbow</option>
+                                    <option>Sling</option>
+                                </optgroup>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="monk-option-3">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Dart (10)</li>
+                            <li>Unarmed Strike</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="paladin-equipment" class="equipment-by-class">
+                    <div id="paladin-option-1">
+                        <p class="heading3">Choose one of the following types of packs:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="paladin-option-1" value="Priest's Pack" checked onchange="updateEquipmentList(this.value, 1)()"><span>Priest's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="paladin-option-1" value="Explorer's Pack"
+                                   onchange="updateEquipmentList(this.value, 1)"><span>Explorer's Pack</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="paladin-option-2">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <span>Martial Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="paladin-martial-weapon-select-1">
+                                <optgroup label="Martial Ranged Weapon">
+                                    <option>Blowgun</option>
+                                    <option>Crossbow, hand</option>
+                                    <option>Crossbow, heavy</option>
+                                    <option>Longbow</option>
+                                    <option>Net</option>
+                                </optgroup>
+                                <optgroup label="Martial Melee Weapon">
+                                    <option>Battleaxe</option>
+                                    <option>Flail</option>
+                                    <option>Glaive</option>
+                                    <option>Greateaxe</option>
+                                    <option>Greatsword</option>
+                                    <option>Halberd</option>
+                                    <option>Lance</option>
+                                    <option>Longsword</option>
+                                    <option>Maul</option>
+                                    <option>Morningstar</option>
+                                    <option>Rapier</option>
+                                    <option>Scimitar</option>
+                                    <option>Shortsword</option>
+                                    <option>Trident</option>
+                                    <option>War pick</option>
+                                    <option>Warhammer</option>
+                                    <option>Whip</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="paladin-option-3">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="paladin-option-3" value="Shield" checked
+                                   onchange="selectWeapon('paladin-martial-weapon-select-2', this, 3)"><span>Shield</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="paladin-option-3" 
+                                       value="Blowgun" onchange="selectWeaponOption('paladin-martial-weapon-select-2', this, 3)"><span>Martial Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 3);" id="paladin-martial-weapon-select-2" disabled>
+                                <optgroup label="Martial Ranged Weapon">
+                                    <option>Blowgun</option>
+                                    <option>Crossbow, hand</option>
+                                    <option>Crossbow, heavy</option>
+                                    <option>Longbow</option>
+                                    <option>Net</option>
+                                </optgroup>
+                                <optgroup label="Martial Melee Weapon">
+                                    <option>Battleaxe</option>
+                                    <option>Flail</option>
+                                    <option>Glaive</option>
+                                    <option>Greateaxe</option>
+                                    <option>Greatsword</option>
+                                    <option>Halberd</option>
+                                    <option>Lance</option>
+                                    <option>Longsword</option>
+                                    <option>Maul</option>
+                                    <option>Morningstar</option>
+                                    <option>Rapier</option>
+                                    <option>Scimitar</option>
+                                    <option>Shortsword</option>
+                                    <option>Trident</option>
+                                    <option>War pick</option>
+                                    <option>Warhammer</option>
+                                    <option>Whip</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="paladin-option-4">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="paladin-option-4" value="Javelin (5)" checked
+                                   onchange="selectWeapon('paladin-simple-melee-select', this, 4)"><span>Javelin (5)</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="paladin-option-4" 
+                                       value="Club" onchange="selectWeaponOption('paladin-simple-melee-select', this, 4)"><span>Simple Melee Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 4);" id="paladin-simple-melee-select" disabled>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="paladin-option-5">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Chain Mail</li>
+                            <li>Holy Symbol</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="ranger-equipment" class="equipment-by-class">
+                    <div id="ranger-option-1">
+                        <p class="heading3">Choose one of the following packs:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="ranger-option-1" value="Explorer's Pack" checked onchange="updateEquipmentList(this.value, 1)()"><span>Explorer's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="ranger-option-1" value="Dungeoneer's Pack"
+                                   onchange="updateEquipmentList(this.value, 1)"><span>Dungeoneer's Pack</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="ranger-option-2">
+                        <p class="heading3">Choose one of the following types of armor:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="ranger-option-2" value="Scale Mail" checked onchange="updateEquipmentList(this.value, 2)()"><span>Scale Mail</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="ranger-option-2" value="Leather Armor"
+                                   onchange="updateEquipmentList(this.value, 2)"><span>Leather Armor</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="ranger-option-3">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="ranger-option-3" value="Shortsword (2)" checked
+                                   onchange="selectWeapon('ranger-simple-melee-select-1', this, 3);document.getElementById('equip-list-5').style.visibility = 'hidden';document.getElementById('ranger-simple-melee-select-2').disabled=true;"><span>Shortsword (2)</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="ranger-option-3" 
+                                       value="Club" onchange="selectWeaponOption('ranger-simple-melee-select-1', this, 3);document.getElementById('equip-list-5').style.visibility = 'visible';selectWeaponOption('ranger-simple-melee-select-2', this, 5)"><span>Simple Melee Weapon (2)&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 3);" id="ranger-simple-melee-select-1" disabled>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 5);" id="ranger-simple-melee-select-2" disabled>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="ranger-option-4">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Longbow, arrows (20)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="rogue-equipment" class="equipment-by-class">
+                    <div id="rogue-option-1">
+                        <p class="heading3">Choose one of the following packs:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="rogue-option-1" value="Explorer's Pack" checked onchange="updateEquipmentList(this.value, 1)()"><span>Explorer's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="rogue-option-1" value="Dungeoneer's Pack"
+                                   onchange="updateEquipmentList(this.value, 1)"><span>Dungeoneer's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="rogue-option-1" value="Burglar's Pack"
+                                   onchange="updateEquipmentList(this.value, 1)"><span>Burglar's Pack</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="rogue-option-2">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="rogue-option-2" value="Rapier" checked onchange="updateEquipmentList(this.value, 2)()"><span>Rapier</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="rogue-option-2" value="Shortsword"
+                                   onchange="updateEquipmentList(this.value, 2)"><span>Shortsword</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="rogue-option-3">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="rogue-option-3" value="Shortbow, arrows (20)" checked onchange="updateEquipmentList(this.value, 3)()"><span>Shortbow, arrows (20)</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="rogue-option-3" value="Shortsword"
+                                   onchange="updateEquipmentList(this.value, 3)"><span>Shortsword</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="rogue-option-4">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Leather Armor</li>
+                            <li>Dagger (2)</li>
+                            <li>Thieves' Tools</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="sorcerer-equipment" class="equipment-by-class">
+                    <div id="sorcerer-option-1">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="sorcerer-option-1" value="Light crossbow, bolts (20) " checked
+                                   onchange="selectWeapon('sorcerer-simple-weapon-select', this, 1)"><span>Light crossbow, bolts (20)</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="sorcerer-option-1" value="Crossbow, light" onchange="selectWeaponOption('sorcerer-simple-weapon-select', this, 1)"><span>Simple Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="sorcerer-simple-weapon-select" disabled>
+                                <optgroup label="Simple Ranged Weapon">
+                                    <option>Crossbow, light</option>
+                                    <option>Dart</option>
+                                    <option>Shortbow</option>
+                                    <option>Sling</option>
+                                </optgroup>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="sorcerer-option-2">
+                        <p class="heading3">Choose one of the following:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="sorcerer-option-2" value="Component Pouch" checked
+                                   onchange="updateEquipmentList(this.value, 2)()"><span>Component Pouch</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="sorcerer-option-2" value="Arcane Focus"
+                                   onchange="updateEquipmentList(this.value, 2)"><span>Arcane Focus</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="sorcerer-option-3">
+                        <p class="heading3">Choose one of the following packs:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="sorcerer-option-3" value="Explorer's Pack" checked
+                                   onchange="updateEquipmentList(this.value, 3)()"><span>Explorer's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="sorcerer-option-3" value="Dungeoneer's Pack"
+                                   onchange="updateEquipmentList(this.value, 3)"><span>Dungeoneer's Pack</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="sorcerer-option-4">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Dagger (2)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="warlock-equipment" class="equipment-by-class">
+                    <div id="warlock-option-1">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="warlock-option-1" value="Light crossbow, bolts (20) " checked
+                                   onchange="selectWeapon('warlock-simple-weapon-select-1', this, 1)"><span>Light crossbow, bolts (20)</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="warlock-option-1" value="Crossbow, light" onchange="selectWeaponOption('warlock-simple-weapon-select-1', this, 1)"><span>Simple Weapon&nbsp;</span>
+                            </label>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="warlock-simple-weapon-select-1" disabled>
+                                <optgroup label="Simple Ranged Weapon">
+                                    <option>Crossbow, light</option>
+                                    <option>Dart</option>
+                                    <option>Shortbow</option>
+                                    <option>Sling</option>
+                                </optgroup>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="warlock-option-2">
+                        <p class="heading3">Choose one of the following:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="warlock-option-2" value="Component Pouch" checked
+                                   onchange="updateEquipmentList(this.value, 2)()"><span>Component Pouch</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="warlock-option-2" value="Arcane Focus"
+                                   onchange="updateEquipmentList(this.value, 2)"><span>Arcane Focus</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="warlock-option-3">
+                        <p class="heading3">Choose one of the following packs:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="warlock-option-3" value="Scholars's Pack" checked
+                                   onchange="updateEquipmentList(this.value, 3)()"><span>Scholars's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="warlock-option-3" value="Dungeoneer's Pack"
+                                   onchange="updateEquipmentList(this.value, 3)"><span>Dungeoneer's Pack</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="warlock-option-4">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                            <span>Simple Weapon&nbsp;</span>
+                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 4)" id="warlock-simple-weapon-select-2">
+                                <optgroup label="Simple Ranged Weapon">
+                                    <option>Crossbow, light</option>
+                                    <option>Dart</option>
+                                    <option>Shortbow</option>
+                                    <option>Sling</option>
+                                </optgroup>
+                                <optgroup label="Simple Melee Weapon">
+                                    <option>Club</option>
+                                    <option>Dagger</option>
+                                    <option>Greatclub</option>
+                                    <option>Handaxe</option>
+                                    <option>Javelin</option>
+                                    <option>Light Hammer</option>
+                                    <option>Mace</option>
+                                    <option>Quarterstaff</option>
+                                    <option>Sickle</option>
+                                    <option>Spear</option>
+                                    <option>Unarmed Strike</option>
+                                </optgroup>
+                            </select>
+                    </div>
+                    <div id="warlock-option-5">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Leather Armor</li>
+                            <li>Dagger (2)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="wizard-equipment" class="equipment-by-class">
+                    <div id="wizard-option-1">
+                        <p class="heading3">Choose one of the following weapons:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="wizard-option-1" value="Quarterstaff" checked
+                                   onchange="updateEquipmentList(this.value, 1)()"><span>Quarterstaff</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="wizard-option-1" value="Dagger"
+                                   onchange="updateEquipmentList(this.value, 1)"><span>Dagger</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="wizard-option-2">
+                        <p class="heading3">Choose one of the following:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="wizard-option-2" value="Component Pouch" checked
+                                   onchange="updateEquipmentList(this.value, 2)()"><span>Component Pouch</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="wizard-option-2" value="Arcane Focus"
+                                   onchange="updateEquipmentList(this.value, 2)"><span>Arcane Focus</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="wizard-option-3">
+                        <p class="heading3">Choose one of the following packs:</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="wizard-option-3" value="Scholars's Pack" checked
+                                   onchange="updateEquipmentList(this.value, 3)()"><span>Scholars's Pack</span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="wizard-option-3" value="Explorer's Pack"
+                                   onchange="updateEquipmentList(this.value, 3)"><span>Explorer's Pack</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div id="wizard-option-4">
+                        <p class="heading3">You have been given the following equipment:</p>
+                        <ul class="heading3">
+                            <li>Spellbook</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+    <div class="">
+        <div class="line">
+            <p id="name"></p>
+            <hr>
+            <p>Name</p>
+        </div>
+        <div class="line">
+            <p id="race">Dragonborn</p>
+            <hr>
+            <p>Race</p>
+        </div>
+        <div class="line">
+            <p id="class">Barbarian</p>
+            <hr>
+            <p>Class</p>
+        </div>
+        <div class="line">
+            <p id="experience"></p>
+            <hr>
+            <p>Experience</p>
+        </div>
+        <div class="line">
+            <p id="alignment">Chaotic Good</p>
+            <hr>
+            <p>Alignment</p>
+        </div>
+        
+        <div>
+            <div>
+                <div class="heading"></div>
+                <p class="heading">Strength</p>
+                <p class="heading">Dexterity</p>
+                <p class="heading">Constitution</p>
+                <p class="heading">Inteligence</p>
+                <p class="heading">Wisdom</p>
+                <p class="heading">Charisma</p>
+                <p class="heading">Armor Class</p>
+                <p class="heading">Initiative</p>
+                <p class="heading">Speed</p>
+            </div>
+            <div>
+                <p class="heading">Stat</p>
+                <div class="border border-dark box">
+                    <p id="strength-stat">15</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="dexterity-stat">14</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="constitution-stat">13</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="inteligence-stat">12</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="wisdom-stat">10</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="charisma-stat">8</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="armorClass-stat">&nbsp;</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="initiative-stat">&nbsp;</p>
+                </div>
+               <div class="border border-dark box">
+                    <p id="speed-stat">&nbsp;</p>
+                </div>
+            </div>
+             <div>
+                <p class="heading">Mod</p>
+               <div class="border border-dark box">
+                    <p id="strength-mod">2</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="dexterity-mod">2</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="constitution-mod">1</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="inteligence-mod">1</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="wisdom-mod">0</p>
+                </div>
+                <div class="border border-dark box">
+                    <p id="charisma-mod">-1</p>
+                </div>
+                <p class="box">&nbsp;</p>
+                <p class="box">&nbsp;</p>
+                <p class="box">&nbsp;</p>
+            </div>
+            <div>
+                <p class="heading headingLeft">Saving Throws</p>
+                <p class="border border-dark box">&nbsp;</p>
+                <p class="border border-dark box">&nbsp;</p>
+                <p class="border border-dark box">&nbsp;</p>
+                <p class="border border-dark box">&nbsp;</p>
+                <p class="border border-dark box">&nbsp;</p>
+                <p class="border border-dark box">&nbsp;</p>
+                <p class="box">&nbsp;</p>
+                <p class="box">&nbsp;</p>
+                <p class="box">&nbsp;</p>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div class="header5 center-text">
+                    <p>Skills</p>
+                </div>
+                 <div class="header5 center-text">
+                    <p>Attack &amp; Spellcasting</p>
+                </div>
+                 <div class="header5">
+                    <p>Hit Points:</p>
+                </div>
+                 <div class="header5 center-text">
+                    <p>Background</p>
+                </div>
+            </div>
+            <div style="display: flex;">
+            <div class="border border-dark boxBig">
+                <div class="skill-row" id="acrobatics">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Acrobatics</p>
+                </div>
+                <div class="skill-row" id="animalHandling">
+                     <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Animal Handling</p>
+                </div>
+                <div class="skill-row" id="arcana">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Arcana</p>
+                </div>
+                <div class="skill-row" id="athletics">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Athletics</p>
+                </div>
+                <div class="skill-row" id="deception">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Deception</p>
+                </div>
+                <div class="skill-row" id="history">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">History</p>
+                </div>
+                <div class="skill-row" id="insight">
+                    <i class="fa fa-circle"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">2&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Insight</p>
+                </div>
+                <div class="skill-row" id="intimidation">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Initmidation</p>
+                </div>
+                <div class="skill-row" id="investigation">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Investigation</p>
+                </div>
+                <div class="skill-row" id="medicine">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Medicine</p>
+                </div>
+                <div class="skill-row" id="nature">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Nature</p>
+                </div>
+                <div class="skill-row" id="perception">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Perception</p>
+                </div>
+                <div class="skill-row" id="performance">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Performance</p>
+                </div>
+                <div class="skill-row" id="persuasion">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Persuasion</p>
+                </div>
+                <div class="skill-row" id="religion">
+                    <i class="fa fa-circle"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">1&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Religion</p>
+                </div>
+                <div class="skill-row" id="slightOfHand">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Slight of Hand</p>
+                </div>
+                <div class="skill-row" id="stealth">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Stealth</p>
+                </div>
+                <div class="skill-row" id="survivial">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="skill">Survival</p>
+                </div >
+            </div>
+            
+            <div class="border border-dark boxBig" id="cantripsSpellsEct">
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-1">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-2">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-3">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-4">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-5">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-6">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-7">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-8">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-9">
+                    <i class="fa fa-circle-o"></i>
+                   <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-10">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-11">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-12">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-13">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-14">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-15">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0  skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-16">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-17">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+                <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-18">
+                    <i class="fa fa-circle-o"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="skill"></p>
+                </div>
+            </div>
+            <div id="column-3" class="boxBig">
+                <p>Death Saving Throws</p>
+                <div class="border border-dark">
+                    <div>
+                        <p class="skill dts">Successes:</p>
+                        <img class="image" src="images/marks.jpg">
+                    </div>
+                    <div>
+                        <p class="skill dts">Failures:</p>
+                        <img class="image" src="images/marks.jpg">
+                    </div>
+                </div>
+                <br>
+                <p>Equipment</p>
+                <div class="border border-dark" id="equip">
+                    <div class="skill-row">
+                        <li id="equip-list-1" class='background-info'>Greataxe</li>
+                        <li id="equip-list-2" class='background-info'>Handaxe (2)</li>
+                        <li id="equip-list-3" class='background-info'>Explorer's Pack</li>
+                        <li id="equip-list-4" class='background-info'>Javelin (4)</li>
+                        <li id="equip-list-5" class='background-info' style="visibility: hidden;"></li>
+                        <li id="equip-list-6" class='background-info' style="visibility: hidden;"></li>
+                        <li id="equip-list-7" class='background-info' style="visibility: hidden;"></li>
+                        <li id="equip-list-8" class='background-info' style="visibility: hidden;"></li>
+                        <li id="equip-list-9" class='background-info' style="visibility: hidden;"></li>
+                        <li id="equip-list-10" class='background-info' style="visibility: hidden;"></li>
+                    </div>
+                </div>
+            </div>
+            <div class="border border-dark boxBig" id="backgroundBox">
+                <div class='skill-row'>
+                    <li class='background-info' id="background">Acolyte</li>
+                    <li class='background-info' id="personalityTrait">I idolize a particular hero of my faith, and constantly refer to that person's deeds and example.</li>
+                    <li class='background-info'  id="ideal">Tradition</li>
+                    <li class='background-info' id="bond">I would die to recover an ancient relic of my faith that was lost long ago.</li>
+                    <li class='background-info' id="flaw">I judge others harshly, and myself even more severly.</li>
+                </div>
+                <br>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="javascript/jquery-3.sdx" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="javascript/popper.sdx"></script>
+    <script src="javascript/bootstrap.sdx"></script>
+  
+
+</div></body></html>
