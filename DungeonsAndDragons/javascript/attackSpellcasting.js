@@ -130,10 +130,10 @@ function verifyNumberofSelectedCantrips() {
     }
    
     if(currentNumberSelected > numberOfSelectedCantrips) {
-        document.getElementById("cantrip-warning").style.display = "block";
+        document.getElementById("cantrip-warning").style.visibility = "visible";
     }
     else {
-        document.getElementById("cantrip-warning").style.display = "none";
+        document.getElementById("cantrip-warning").style.visibility = "hidden";
     }
 }
 

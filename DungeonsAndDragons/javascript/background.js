@@ -743,4 +743,5 @@ function changeBackgroundValues(curElement) {
     
     var className = document.getElementById("class").innerHTML;
     setClassProperties(className);
+    updateAllSkills();
 }

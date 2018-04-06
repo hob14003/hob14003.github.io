@@ -1,6 +1,7 @@
 function onLoadMethod() {
     document.getElementById("acolyte").selected = true;
     document.getElementById("nameInput").value = "";
+    getRandomName();
 }
 
 function clearNavs() {
@@ -20,6 +21,7 @@ function hideTabs() {
     document.getElementById("class-tab").classList.add("hide");
     document.getElementById("proficiencies-tab").classList.add("hide");
     document.getElementById("attackSpellcasting-tab").classList.add("hide");
+    document.getElementById("home-tab").classList.add("hide");
 }
 
 function showTab(curNav, tab) {
@@ -35,14 +37,6 @@ function showTabHome(curNav) {
     curNav.classList.add('nav-tab-active');
 }
 
-function clearRaceGroupSelection() {
-    var raceGroup = document.getElementsByClassName("race-group");
-    for(var i = 0; i < raceGroup.length; i++) {
-        var item = raceGroup[i].childNodes[1];
-        item.style.backgroundColor = "white";
-    }
-}
-
 function getRaceList() {
     var raceList = [
         "Dragonborn",
@@ -50,8 +44,8 @@ function getRaceList() {
         "High Elf",
         "Wood Elf",
         "Half-Elf",
-        "Halfling: Lightfoot",
-        "Halfling: Stout",
+        "Lightfoot Halfling",
+        "Stout Halfling",
         "Tiefling",
         "Hill Dwarf",
         "Mountain Dwarf",
@@ -62,41 +56,40 @@ function getRaceList() {
     ];
     return raceList;
 }
-function selectThisRace(element, elementType) {
-    clearRaceGroupSelection();
-    element.style.backgroundColor = "#99ffcc";
-    
-    switch(elementType) {
-        case "button":
-            document.getElementById("race").innerHTML = element.innerHTML;
-            break;
-        case "Random":
-            document.getElementById("race").innerHTML = getRandomRace();
-            break;
-        default:
-            selectThisRaceFromSelect(element);
-    }
+function selectRandomRace(element) {
+    var race = getRandomRace();
+    document.getElementById("race").innerHTML = race;
+    updateSpeed(race);
+    var elementRace = document.getElementById("selectRace");
+    elementRace.value = race;
 }
 
-function clearClassGroupSelection() {
-    var classGroup = document.getElementsByClassName("class-group");
-    for(var i = 0; i < classGroup.length-1; i++) {
-        var item = classGroup[i].childNodes[1];
-        item.style.backgroundColor = "white";
-    }
+function selectThisRaceFromSelect(element) {
+    var race = element.value;
+    document.getElementById("race").innerHTML = race;
+    updateSpeed(race);
+}
+
+function selectRandomClass(element) {
+    var randomClass = getRandomClass();
+    document.getElementById("class").innerHTML = randomClass;
+    var elementClass = document.getElementById("selectClass");
+    elementClass.value = randomClass;
+    setClassProperties(randomClass);
+    
+    updateArmorClass();
+    returnSavingThrowsToBase();
+    updateSavingThrowsByClass();
 }
 
 function selectThisClass(element) {
-    clearClassGroupSelection();
-    element.style.backgroundColor =  "#99ffcc";
-    if(element.innerHTML == "Random") {
-        var randomClass = getRandomClass();
-        document.getElementById("class").innerHTML = randomClass;
-        setClassProperties(randomClass);
-    } else {
-        document.getElementById("class").innerHTML = element.innerHTML;
-        setClassProperties(element.innerHTML);
-    }
+    var classValue = element.value;
+    document.getElementById("class").innerHTML = classValue;
+    setClassProperties(classValue);
+    
+    updateArmorClass();
+    returnSavingThrowsToBase();
+    updateSavingThrowsByClass();
 }
 
 function getRandomClass() {
@@ -104,8 +97,13 @@ function getRandomClass() {
     return getClassList()[randomNumber];
 }
 
-function selectThisRaceFromSelect(element) {
-    document.getElementById("race").innerHTML = element.value;
+function updateSpeed(raceName) {
+    var speed = "30";
+    var race = raceName.toLowerCase();
+    if(race.includes("dwarf") || race.includes("halfling") || race.includes("gnome")) {
+        speed = "25";
+    }
+    document.getElementById("speed-stat").innerHTML = speed;
 }
 
 function getRandomRace() {
@@ -135,6 +133,7 @@ function resetStats() {
     updateAbilityScores("inteligence-selection-box", 12);
     updateAbilityScores("wisdom-selection-box", 10);
     updateAbilityScores("charisma-selection-box", 8);
+    updateSavingThrowsByClass();
 }
 
 function rollDice() {
@@ -147,13 +146,31 @@ function rollDice() {
     checkNodeExists(5);
     checkNodeExists(6);
     
+    var roll1 = getRandomDiceRoll();
+    var roll2 = getRandomDiceRoll();
+    var roll3 = getRandomDiceRoll();
+    var roll4 = getRandomDiceRoll();
+    var roll5 = getRandomDiceRoll();
+    var roll6 = getRandomDiceRoll();
+    var total = roll1 + roll2 + roll3 + roll4 + roll5 + roll6;
+    
+    while(total <= 72) {
+        roll1 = getRandomDiceRoll();
+        roll2 = getRandomDiceRoll();
+        roll3 = getRandomDiceRoll();
+        roll4 = getRandomDiceRoll();
+        roll5 = getRandomDiceRoll();
+        roll6 = getRandomDiceRoll();
+        total = roll1 + roll2 + roll3 + roll4 + roll5 + roll6;
+    }
+    
     //fill these with your final random numbers
-    document.getElementById("random-stat-1").innerHTML = getRandomDiceRoll();
-    document.getElementById("random-stat-2").innerHTML = getRandomDiceRoll();
-    document.getElementById("random-stat-3").innerHTML = getRandomDiceRoll();
-    document.getElementById("random-stat-4").innerHTML = getRandomDiceRoll();
-    document.getElementById("random-stat-5").innerHTML = getRandomDiceRoll();
-    document.getElementById("random-stat-6").innerHTML = getRandomDiceRoll();
+    document.getElementById("random-stat-1").innerHTML = roll1;
+    document.getElementById("random-stat-2").innerHTML = roll2;
+    document.getElementById("random-stat-3").innerHTML = roll3;
+    document.getElementById("random-stat-4").innerHTML = roll4;
+    document.getElementById("random-stat-5").innerHTML = roll5;
+    document.getElementById("random-stat-6").innerHTML = roll6;
 }
 
 function getRandomDiceRoll() { 
@@ -166,8 +183,9 @@ function getRandomDiceRoll() {
 }
 
 function getRandomNumber() {
-    return Math.floor((Math.random() * 6) + 1);
+    return Math.floor((Math.random() * 7) + 1);
 }
+
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -197,11 +215,136 @@ function updateAbilityScores(id, statNumber) {
         }
     }
     var modId = ability + "-mod";
+    var savingThrowId = ability + "-st";
     document.getElementById(statId).innerHTML = statNumber;
     document.getElementById(modId).innerHTML = modString;
-    
-    //updateSkills that are marked
-    updateMarkedSkills();
+    document.getElementById(savingThrowId).innerHTML = modString;
+    if(id.includes("dexterity")) {
+        document.getElementById("initiative-stat").innerHTML = modString;
+        updateArmorClass();
+    }
+    //updateSkills that are marked with bonus and others with stats
+    updateAllSkills();
+}
+
+function updateSavingThrowsByClass() {
+    var className = document.getElementById("class").innerHTML;
+    if(className.includes("Barbarian")) {
+        updateSavingThrow("strength");
+        updateSavingThrow("constitution");
+    } else if(className.includes("Bard")) {
+        updateSavingThrow("dexterity");
+        updateSavingThrow("charisma");
+    } else if(className.includes("Cleric")) {
+        updateSavingThrow("wisdom");
+        updateSavingThrow("charisma");
+    } else if(className.includes("Druid")) {
+        updateSavingThrow("wisdom");
+        updateSavingThrow("inteligence");
+    } else if(className.includes("Fighter")) {
+        updateSavingThrow("strength");
+        updateSavingThrow("constitution");
+    } else if(className.includes("Monk")) {
+        updateSavingThrow("dexterity");
+        updateSavingThrow("strength");
+    } else if(className.includes("Paladin")) {
+        updateSavingThrow("wisdom");
+        updateSavingThrow("charisma");
+    } else if(className.includes("Ranger")) {
+        updateSavingThrow("strength");
+        updateSavingThrow("dexterity");
+    } else if(className.includes("Rogue")) {
+        updateSavingThrow("dexterity");
+        updateSavingThrow("inteligence");
+    } else if(className.includes("Sorcerer")) {
+        updateSavingThrow("constitution");
+        updateSavingThrow("charisma");
+    } else if(className.includes("Warlock")) {
+        updateSavingThrow("wisdom");
+        updateSavingThrow("charisma");
+    } else if(className.includes("Wizard")) {
+        updateSavingThrow("inteligence");
+        updateSavingThrow("wisdom");
+    } 
+}
+
+function returnSavingThrowsToBase() {
+    document.getElementById("strength-st").innerHTML = document.getElementById("strength-mod").innerHTML;
+    document.getElementById("dexterity-st").innerHTML = document.getElementById("dexterity-mod").innerHTML;
+    document.getElementById("constitution-st").innerHTML = document.getElementById("constitution-mod").innerHTML;
+    document.getElementById("inteligence-st").innerHTML = document.getElementById("inteligence-mod").innerHTML;
+    document.getElementById("wisdom-st").innerHTML = document.getElementById("wisdom-mod").innerHTML;
+    document.getElementById("charisma-st").innerHTML = document.getElementById("charisma-mod").innerHTML;
+}
+
+function updateSavingThrow(ability) {
+    var savingThrow = document.getElementById(ability + "-mod").innerHTML;
+        var updatedSavingThrow = parseInt(savingThrow) + 2;
+        document.getElementById(ability + "-st").innerHTML = updatedSavingThrow;
+}
+
+function updateArmorClass() {
+   var className = document.getElementById("class").innerHTML;
+   var classArmor = getArmorByClass(className);
+   var dexMod = parseInt(document.getElementById("dexterity-mod").innerHTML);
+   var armorClass = 10 + dexMod; //no armor
+
+    if(classArmor.includes("Shield")) {
+        armorClass = 18; // chain mail & shield
+    }
+    else if(classArmor.includes("Hide")) { // not currently in use
+        if(dexMod > 2) {
+            armorClass = 14; // hide
+        } else {
+            armorClass = 12 + dexMod; // hide
+        }
+    }
+    else if(classArmor.includes("Mail")) {
+        armorClass = 16; // chain mail (also scale mail)
+    }
+    else if(classArmor.includes("Leather")) {
+        armorClass = 11 + dexMod; // leather
+        
+    }
+    else if(classArmor.includes("Mage")) { // not currently in use
+        armorClass = 13 + dexMod; // mage armor
+    }
+   document.getElementById("armorClass-stat").innerHTML = armorClass;
+}
+
+function getArmorByClass(className) {
+    var armor = "";
+    if(className.includes("Bard") || className.includes("Rogue")) {
+        armor = document.getElementById("equip-list-4").innerHTML;
+    } else if(className.includes("Cleric")) {
+        armor = document.getElementById("equip-list-2").innerHTML;
+        if(armor.includes("Scale Mail")) {
+            armor += "Shield";
+        }
+    } else if(className.includes("Druid")) {
+        armor = document.getElementById("equip-list-3").innerHTML;
+    } else if(className.includes("Fighter")) {
+        armor = document.getElementById("equip-list-1").innerHTML;
+        if(armor.includes("Chain Mail")) {
+            var shield = document.getElementById("equip-list-3").innerHTML;
+            if(shield.includes("Shield")) {
+                armor += "Shield";
+            }
+        }
+    } else if(className.includes("Paladin")) {
+        armor = document.getElementById("equip-list-5").innerHTML;
+        if(armor.includes("Chain Mail")) {
+            var shield = document.getElementById("equip-list-3").innerHTML;
+            if(shield.includes("Shield")) {
+                armor += "Shield";
+            }
+        }
+    } else if(className.includes("Ranger")) {
+        armor = document.getElementById("equip-list-2").innerHTML;
+    } else if(className.includes("Warlock")) {
+        armor = document.getElementById("equip-list-5").innerHTML;
+    }
+    return armor;
 }
 
 function clearSkills() {
@@ -297,7 +440,7 @@ function verifyNumberofSelectedSkills() {
     }
 }
 
-function updateMarkedSkills() {
+function updateAllSkills() {
     var skillsList = getSkillsList();
    
     for (skillName in skillsList) {
@@ -306,6 +449,10 @@ function updateMarkedSkills() {
            var skill = document.getElementById(skillName);
            var skillValue = document.getElementById(stat + "-mod").innerHTML;
            skill.childNodes[3].innerHTML = parseInt(skillValue) + 2;
+       } else {
+           var skill = document.getElementById(skillName);
+           var skillValue = document.getElementById(stat + "-mod").innerHTML;
+           skill.childNodes[3].innerHTML = parseInt(skillValue);
        }
    }
 }
@@ -342,6 +489,7 @@ function selectWeaponOption(weaponTypeOption, element, itemNumber) {
 
 function updateEquipmentList(value, itemNumber) {
     document.getElementById("equip-list-" + itemNumber).innerHTML =value;
+    updateArmorClass();
 }
 
 function getRandomBackground() {
