@@ -114,7 +114,7 @@ function getRandomRace() {
 function checkNodeExists(statNumber) {
     var childNodeId = "random-stat-" + statNumber;
     var parentElement = document.getElementById(childNodeId + "-parentNode");
-    if(parentElement.childNodes.length == 2) {
+    if(parentElement.childNodes.length == 4) {
         var curParentNode = document.getElementById(childNodeId).parentNode;
         curParentNode.removeChild(document.getElementById(childNodeId));
         var p = document.createElement("P");
@@ -154,7 +154,7 @@ function rollDice() {
     var roll6 = getRandomDiceRoll();
     var total = roll1 + roll2 + roll3 + roll4 + roll5 + roll6;
     
-    while(total <= 72) {
+    while(total <= 67) {
         roll1 = getRandomDiceRoll();
         roll2 = getRandomDiceRoll();
         roll3 = getRandomDiceRoll();
@@ -390,11 +390,12 @@ function markSkill(skillName, stat) {
     skill.childNodes[3].innerHTML = parseInt(skillValue) + 2;
 }
 
-function unmarkSkill(skillName) {
+function unmarkSkill(skillName, stat) {
     var skill = document.getElementById(skillName);
     skill.childNodes[1].classList.add("fa-circle-o");
     skill.childNodes[1].classList.remove("fa-circle");
-    skill.childNodes[3].innerHTML = "&nbsp;&nbsp;&nbsp;";
+    var skillValue = document.getElementById(stat + "-mod").innerHTML;
+    skill.childNodes[3].innerHTML = parseInt(skillValue);
 }
 
 function selectSkill(element, skillName) {
@@ -402,7 +403,7 @@ function selectSkill(element, skillName) {
     if(element.checked) {
         markSkill(skillName, getSkillsList()[skillName]);
     } else {
-        unmarkSkill(skillName);
+        unmarkSkill(skillName, getSkillsList()[skillName]);
     }
 }
 function verifyNumberofSelectedSkills() {
@@ -466,7 +467,27 @@ function enableCheckbox(profSkill) {
 }
 
 function updateBackground(curElement, backgroundId) {
-    document.getElementById(backgroundId).innerHTML = curElement.value;
+    var label = "";
+    switch (backgroundId) {
+        case "background":
+            label = "Background: ";
+            break;
+        case "personalityTrait":
+            label = "Personality Trait: ";
+            break;
+        case "ideal":
+            label = "Ideal: ";
+            break;
+        case "bond":
+            label = "Bond: ";
+            break;
+        case "flaw":
+            label = "Flaw: ";
+            break;
+        default:
+            label = "";
+    }
+    document.getElementById(backgroundId).innerHTML = label + curElement.value;
 }
 
 function fillName(curElement) {

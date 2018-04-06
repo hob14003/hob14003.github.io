@@ -1,10 +1,10 @@
 
 function fillDefaults(background, personalityTrait, ideal, bond, flaw) {
-    document.getElementById("background").innerHTML = background;
-    document.getElementById("personalityTrait").innerHTML = personalityTrait;
-    document.getElementById("ideal").innerHTML = ideal;
-    document.getElementById("bond").innerHTML = bond;
-    document.getElementById("flaw").innerHTML = flaw;
+    document.getElementById("background").innerHTML = "Background: " + background;
+    document.getElementById("personalityTrait").innerHTML = "Personality Trait: " + personalityTrait;
+    document.getElementById("ideal").innerHTML = "Ideal: " + ideal;
+    document.getElementById("bond").innerHTML = "Bond: " + bond;
+    document.getElementById("flaw").innerHTML = "Flaw: " + flaw;
 }
 
 function fillAcolyteValues() {
