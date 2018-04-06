@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-   
+
     <link rel="icon" href="images/dice2.ico">
     <title>Character Creator</title>
 
@@ -15,165 +15,290 @@
     <!-- Custom styles for this template -->
     <link href="css/navbar.css" rel="stylesheet">
     
+    <!-- icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     <link rel="stylesheet" href="css/CharacterCreator.css">
     <script src="javascript/CharacterCreator.js"></script>
     <script src="javascript/background.js"></script>
     <script src="javascript/class.js"></script>
     <script src="javascript/attackSpellcasting.js"></script>
+    <script src="javascript/name.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Acme|Amaranth|Mina|Philosopher" rel="stylesheet">
   </head>
 
-  <body onload="onLoadMethod()">
+  <body class="bg-image" onload="onLoadMethod()">
 
-    <div class="container">
+    <div class="">
       <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
+        <div style="display: block">
+            <img class="nav-tab" src="images/brand7.png" id="brand" onclick="showTab(this, 'home')">
+        </div>
+        <br>
         <div class="collapse navbar-collapse" id="navbarsExample09">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav">
             <li class="nav-item">
-                <h3 class="nav-tab" onclick="showTab(this, 'abilityScores')">Ability Scores</h3>
+                <h3 class="nav-tab" id="bg-abilityScores" onclick="showTab(this, 'abilityScores')">Ability Scores</h3>
             </li>
             <li class="nav-item">
-             <h3 class="nav-tab" onclick="showTab(this, 'race')">Race</h3>
+             <h3 class="nav-tab" id="bg-race" onclick="showTab(this, 'race')">Race</h3>
             </li>
             <li class="nav-item">
-              <h3 class="nav-tab" onclick="showTab(this, 'background')">Background/Personality</h3>
+              <h3 class="nav-tab" id="bg-personality" onclick="showTab(this, 'background')">Background/Personality</h3>
             </li>
             <li class="nav-item">
-              <h3 class="nav-tab" onclick="showTab(this, 'class')">Class</h3>
+              <h3 class="nav-tab" id="bg-class" onclick="showTab(this, 'class')">Class</h3>
             </li>
             <li class="nav-item">
-              <h3 class="nav-tab" onclick="showTab(this, 'proficiencies')">Proficiencies</h3>
+              <h3 class="nav-tab" id="bg-skills" onclick="showTab(this, 'proficiencies')">Skills</h3>
             </li>
             <li class="nav-item">
-              <h3 class="nav-tab" onclick="showTab(this, 'attackSpellcasting')">Attack &amp; Spellcasting</h3>
+              <h3 class="nav-tab" id="bg-attackSpellcasting" onclick="showTab(this, 'attackSpellcasting')">Attack &amp; Spellcasting</h3>
             </li>
           </ul>
             <div class="ml-auto p-2"> 
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <h3 class="nav-tab" onclick="showTabHome(this)"><i class="fa fa-home" style="font-size:36px"></i></h3>
+                        <h3 class="nav-tab" onclick="showTab(this, 'home')"><i class="fa fa-home" style="font-size:36px"></i></h3>
                     </li>
                 </ul>
             </div>
         </div>
       </nav>
+      </div>
+    <div class="container">
     <div id="abilityScores-tab" class="tab hide">
-        <div class="stats width-48"></div>
+        <p class="text-white" style="margin-bottom: 0px;">Click the dice to generate numbers, then drag the numbers to update your stats.</p>
+        <div class="stats width-48">
+        </div>
         <div class="stats width-50 align-right"> 
             <p class="heading1">Strength</p>
             <p class="heading1">Dexterity</p>
-            <p class="heading1">Constitution</p>
-            <p class="heading1">Inteligence</p>
-            <p class="heading1">Wisdom</p>
-            <p class="heading1">Charisma</p>
+            <p class="heading1" style="padding-left: 8px;">Constitution</p>
+            <p class="heading1" style="padding-left: 15px;">Inteligence</p>
+            <p class="heading1" style="padding-right: 15px;">Wisdom</p>
+            <p class="heading1" style="padding-right: 15px;">Charisma</p>
         </div>
         <div class="stats width-48">
-            <img src="images/dice2.png" width="50" onclick="rollDice();" style="float: left">
-            <div class="border border-dark nav-box" id="random-stat-1-parentNode">
+            <div style="float:left" class="tooltip2">
+                <img src="images/dice8.JPG" onclick="rollDice();" id="dice">
+                <span class="tooltiptext2">Click to roll the dice</span>
+            </div>
+            <div class="border border-dark nav-box center-text tooltip2" id="random-stat-1-parentNode">
                 <p id="random-stat-1" draggable="true" ondragstart="drag(event)"></p>
+                <span class="tooltiptext2">Once you have "rolled" the dice, click and drag the numbers to the stats on the right</span>
             </div>
-            <div class="border border-dark nav-box" id="random-stat-2-parentNode">
+            <div class="border border-dark nav-box center-text tooltip2" id="random-stat-2-parentNode">
                 <p id="random-stat-2" draggable="true" ondragstart="drag(event)"></p>
+                <span class="tooltiptext2">Once you have "rolled" the dice, click and drag the numbers to the stats on the right</span>
             </div>
-            <div class="border border-dark nav-box"
-            id="random-stat-3-parentNode">
+            <div class="border border-dark nav-box center-text tooltip2" id="random-stat-3-parentNode">
                 <p id="random-stat-3" draggable="true" ondragstart="drag(event)"></p>
+                <span class="tooltiptext2">Once you have "rolled" the dice, click and drag the numbers to the stats on the right</span>
             </div>
-            <div class="border border-dark nav-box"
-            id="random-stat-4-parentNode">
+            <div class="border border-dark nav-box center-text tooltip2" id="random-stat-4-parentNode">
                 <p id="random-stat-4" draggable="true" ondragstart="drag(event)"></p>
+                <span class="tooltiptext2">Once you have "rolled" the dice, click and drag the numbers to the stats on the right</span>
              </div>
-            <div class="border border-dark nav-box"
-            id="random-stat-5-parentNode">
+            <div class="border border-dark nav-box center-text tooltip2" id="random-stat-5-parentNode">
                 <p id="random-stat-5" draggable="true" ondragstart="drag(event)"></p>
+                <span class="tooltiptext2">Once you have "rolled" the dice, click and drag the numbers to the stats on the right</span>
              </div>
-            <div class="border border-dark nav-box"
-            id="random-stat-6-parentNode">
+            <div class="border border-dark nav-box center-text tooltip2" id="random-stat-6-parentNode">
                 <p id="random-stat-6" draggable="true" ondragstart="drag(event)"></p>
+                <span class="tooltiptext2">Once you have "rolled" the dice, click and drag the numbers to the stats on the right</span>
             </div>
         </div>
         <div class="stats width-50 align-right">
-            <div id="charisma-selection-box" class="border border-dark box1" ondrop="drop(event);" ondragover="allowDrop(event)">
+            <div id="charisma-selection-box" class="border border-dark box1 center-text tooltip2" ondrop="drop(event);" ondragover="allowDrop(event)">
+                <span class="tooltiptext2">Once you have "rolled" the dice, drag and drop the generated numbers on the left to the stats box of your choice</span>
             </div>
-            <div id="wisdom-selection-box" class="border border-dark box1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="wisdom-selection-box" class="border border-dark box1 center-text tooltip2" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="tooltiptext2">Once you have "rolled" the dice, drag and drop the generated numbers on the left to the stats box of your choice</span>
             </div>
-            <div id="inteligence-selection-box" class="border border-dark box1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="inteligence-selection-box" class="border border-dark box1 center-text tooltip2" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="tooltiptext2">Once you have "rolled" the dice, drag and drop the generated numbers on the left to the stats box of your choice</span>
             </div>
-            <div id="constitution-selection-box" class="border border-dark box1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="constitution-selection-box" class="border border-dark box1 center-text tooltip2" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="tooltiptext2">Once you have "rolled" the dice, drag and drop the generated numbers on the left to the stats box of your choice</span>
             </div>
-            <div id="dexterity-selection-box" class="border border-dark box1" ondrop="drop(event)" ondragover="allowDrop(event)"> 
+            <div id="dexterity-selection-box" class="border border-dark box1 center-text tooltip2" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="tooltiptext2">Once you have "rolled" the dice, drag and drop the generated numbers on the left to the stats box of your choice</span>
             </div>
-            <div id="strength-selection-box" class="border border-dark box1" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div id="strength-selection-box" class="border border-dark box1 center-text tooltip2" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <span class="tooltiptext2">Once you have "rolled" the dice, drag and drop the generated numbers on the left to the stats box of your choice</span>
             </div>
         </div>
     </div>
         
     <div id="race-tab" class="tab hide">
-        <div class="margin-5">
-            <div class="race-group">
-                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'button');" style="background-color: #99ffcc">Dragonborn</button>
-            </div>
-            <div class="race-group">
-                <select class="form-control" onfocus="selectThisRace(this, 'select');" onchange="selectThisRaceFromSelect(this)">
+        <p class="text-white">Please select a race from one of the following options. If your can't decide select "Random" and we will pick one for you. You can also change it later if you change your mind.</p>
+        <div class="float-left">
+            <div class="race-group tooltip1">
+                <p class="heading4">Race</p>
+                <select style="color: black" id="selectRace" class="form-control" onchange="selectThisRaceFromSelect(this)">
+                        <option>Dragonborn</option>
                     <optgroup label="Elf">
                         <option>Dark Elf</option>
                         <option>High Elf</option>
                         <option>Wood Elf</option>
                     </optgroup>
-                </select>
-            </div>
-            <div class="race-group">
-                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'button');">Half-Elf</button>
-            </div>
-            <div class="race-group">
-                <select class="form-control" onfocus="selectThisRace(this);" onchange="selectThisRaceFromSelect(this)">
+                        <option>Half-Elf</option>
                     <optgroup label="Halfling">
-                        <option>Halfling: Lightfoot</option>
-                        <option>Halfling: Stout</option>
+                        <option>Lightfoot Halfling</option>
+                        <option>Stout Halfling</option>
                     </optgroup>
-                </select>
-            </div>
-            <div class="race-group">
-                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'button');">Tiefling</button>
-            </div>
-        </div>
-         <div class="margin-5">
-         <div class="race-group">
-                <select class="form-control" onfocus="selectThisRace(this);" onchange="selectThisRaceFromSelect(this)">
+                        <option>Tiefling</option>
                     <optgroup label="Dwarf">
                         <option>Hill Dwarf</option>
                         <option>Mountain Dwarf</option>
                     </optgroup>
-                </select>
-            </div>
-            <div class="race-group">
-                <select class="form-control" onfocus="selectThisRace(this);" onchange="selectThisRaceFromSelect(this)">
                     <optgroup label="Gnome">
                         <option>Forest Gnome</option>
                         <option>Rock Gnome</option>
                     </optgroup>
+                        <option>Half-Orc</option>
+                        <option>Human</option>
                 </select>
+                <span class="tooltiptext1">Click to select a race for your character</span>
             </div>
-            <div class="race-group">
-                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'button');">Half-Orc</button>
+            <div class="race-group tooltip1">
+                <button class="btn btn-white full-width" onClick="selectRandomRace(this, 'Random');" style="margin-top:5px;">Random</button>
+                <span class="tooltiptext1">Click to select a random race for your character</span>
             </div>
-             <div class="race-group">
-                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'button');">Human</button>
+        </div>
+        <div class="align-right1">
+            <div>
+                <h5>Dragonborn</h5>
+                <p class="p-white">
+                    Born of dragons, as their name proclaims, the dragonborn walk proudly through a world that greets them with fearful incomprehension. Shaped by draconic gods or the dragons themselves, dragonborn originally hatched from dragon eggs as a unique race, combining the best attributes of dragons and humanoids. Some dragonborn are faithful servants to true dragons, others form the ranks of soldiers in great wars, and still others find themselves adrift, with no clear calling in life.
+                </p>
             </div>
-             <div class="race-group">
-                <button class="btn btn-white full-width" onClick="selectThisRace(this, 'Random');">Random</button>
+            <div>
+                <h5>Dark Elf</h5>
+                <p class="p-white">
+                    Descended from an earlier subrace of dark-skinned elves, the dark elves were banished from the surface world for following the goddess Lolth down the path to evil and corruption. Now they have built their own
+                    civilization in the depths of the Underdark, patterned after the Way of Lolth. Also called drow, the dark elves have black skin that resem bles polished obsidian and
+                    stark white or pale yellow hair. They commonly have very pale eyes (so pale as to be mistaken for white) in shades of lilac, silver, pink, red, and blue. They tend to be smaller and thinner than most elves.
+                </p>
+                <p class="p-white">
+                    Dark elf adventurers are rare, and the race does not exist in all worlds. Check with your Dungeon Master to see if you can play a dark elf character.
+                </p>
+            </div>
+            <div>
+                <h5>High Elf</h5>
+                <p class="p-white">
+                    As a high elf, you have a keen mind and a mastery of at least the basics of magic. In many of the worlds of D&amp;D, there are two kinds of high elves. One type (which includes the gray elves and valley elves of Greyhawk, the Silvanesti of Dragonlance, and the sun elves of the Forgotten Realms) is haughty and reclusive, believing themselves to be superior to non-elves and even other elves. The other type (including the high elves of Greyhawk. the Qualinesti of Dragonlance, and the moon elves of the Forgotten Realms) are more common and more friendly, and often encountered among humans and other races.
+                </p>
+                <p class="p-white">
+                    The sun elves of Faerun (also called gold
+                    elves or sunrise elves) have bronze skin and
+                    hair of copper, black, or golden blond. Their eyes are golden, silver, or black. Moon elves (also called silver elves or gray elves) are much paler, with alabaster skin som etim es tinged with blue. They often have hair of silver-white, black, or blue, but various shades of blond, brown, and red are not uncommon. Their eyes are blue or green and flecked with gold.
+                </p>
+            </div>
+            <div>
+                <h5>Wood Elf</h5>
+                <p class="p-white">
+                    As a wood elf, you have keen senses and intuition, and your fleet feet carry you quickly and stealthily through your native forests. This category includes the wild elves (grugach) of Greyhawk and the Kagonesti of Dragonlance, as well as the races called wood elves in Greyhawk and the Forgotten Realms. In Faerun, wood elves (also called wild elves, green elves, or forest elves) are reclusive and distrusting of non-elves. 
+                </p>
+                <p class="p-white">
+                    Wood elves’ skin tends to be copperish in hue, sometimes with traces of green. Their hair tends toward browns and blacks, but it is occasionally blond or
+                    copper-colored. Their eyes are green, brown, or hazel.
+                </p>
+            </div>
+            <div>
+                <h5>Half-Elf</h5>
+                <p class="p-white">
+                    Walking in two worlds but truly belonging to neither, half-elves com bine what some say are the best qualities of their elf and human parents: human curiosity, inventiveness, and ambition tempered by the refined senses, love of nature, and artistic tastes of the elves. Some half-elves live among humans, set apart by their emotional and physical differences, watching friends
+                    and loved ones age while time barely touches them. Others live with the elves, growing restless as they reach adulthood in the timeless elven realms, while their peers continue to live as children. Many half-elves, unable to fit into either society, choose lives of solitary wandering or join with other misfits and outcasts in the adventuring life.
+                </p>
+            </div>
+            <div>
+                <h5>Lightfoot Halfling</h5>
+                <p class="p-white">
+                    As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You’re inclined to be affable and get along well with others. In the Forgotten Realms, lightfoot halflings have spread the farthest and thus are the most common variety.
+                </p>
+                <p class="p-white">
+                    Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life. In the world of Greyhawk, these halflings are called hairfeet or tallfellows.
+                </p>
+            </div>
+            <div>
+                <h5>Stout Halfling</h5>
+                <p class="p-white">
+                    As a stout halfling, you’re hardier than average and have some resistance to poison. Some say that stouts have dwarven blood. In the Forgotten Realms, these halflings
+                    are called stronghearts, and they’re most common in the south.
+                </p>
+            </div>
+            <div>
+                <h5>Tiefling</h5>
+                <p class="p-white">
+                    To be greeted with stares and whispers, to suffer violence and insult on the street, to see mistrust and fear in every eye: this is the lot of the tiefling. And to twist the knife, tieflings know that this is because a
+                    pact struck generations ago infused the essence of A smodeus—overlord of the Nine Hells—into their bloodline. Their appearance and their nature are not their fault but the result of an ancient sin, for which they and their children and their children’s children
+                    will always be held accountable.
+                </p>
+            </div>
+            <div>
+                <h5>Hill Dwarf</h5>
+                <p class="p-white">
+                    As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience. The gold dwarves of Faerun in their mighty southern kingdom are hill dwarves, as are the exiled Neidar and the debased Klar of Krynn in the Dragonlance setting.
+                </p>
+            </div>
+            <div>
+                <h5>Mountain Dwarf</h5>
+                <p class="p-white">
+                    As a mountain dwarf, you're strong and hardy, accustomed to a difficult life in rugged terrain. You’re probably on the tall side (for a dwarf), and tend toward lighter coloration. The shield dwarves of northern Faerun, as well as the ruling Hylar clan and the noble Daewar clan of Dragonlance, are mountain dwarves.
+                </p>
+            </div>
+            <div>
+                <h5>Forest Gnome</h5>
+                <p class="p-white">
+                    As a forest gnome, you have a natural knack for illusion and inherent quickness and stealth. In the worlds of D&amp;D, forest gnomes are rare and secretive. They gather in hidden com m unities in sylvan forests, using illusions and trickery to conceal themselves from threats or to mask their escape should they be detected. Forest gnomes tend to be friendly with other good-spirited woodland folk, and they regard elves and good fey as their most important allies. These gnomes also befriend small forest animals and rely on them for information about threats that might prowl their lands.
+                </p>
+            </div>
+            <div>
+                <h5>Rock Gnome</h5>
+                <p class="p-white">
+                    As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes. Most gnomes in the worlds of D&amp;D are rock gnomes, including the tinker gnomes of the Dragonlance setting.
+                </p>
+            </div>
+            <div>
+                <h5>Half-Orc</h5>
+                <p class="p-white">
+                    Whether united under the leadership of a mighty warlock or having fought to a standstill after years of conflict, orc and human tribes sometimes form alliances, joining forces into a larger horde to the terror of civilized lands nearby. When these alliances are sealed by marriages, half-orcs are born. Some half-orcs rise to become proud chiefs of orc tribes, their human blood giving them an edge over their full-blooded orc rivals. Some venture into the world to prove their worth among humans and other more civilized races. Many of these become adventurers, achieving greatness for their mighty deeds and notoriety for their barbaric customs and savage fury.
+                </p>
+            </div>
+            <div>
+                <h5>Human</h5>
+                <p class="p-white">
+                    In the reckonings of most worlds, humans are the youngest of the common races, late to arrive on the world scene and short-lived in comparison to dwarves, elves, and dragons. Perhaps it is because of their shorter lives that they strive to achieve as much as they can in the years they are given. Or maybe they feel they have something to prove to the elder races, and that’s why they build their mighty empires on the foundation of
+                    conquest and trade. Whatever drives them, humans are the innovators, the achievers, and the pioneers of the worlds.
+                </p>
             </div>
         </div>
     </div>
-    <div id="background-tab" class="tab hide">
-        <div>
+        
+    <div id="background-tab" class="tab hide clearfix">
+        <p class="text-white">Please select some background for your character. It is probably easiest to move top to bottom through the options. If your can't decide select "Random" and we will pick one for you. You can also change it later if you change your mind.</p>
+        <div class="float-left1">
             <div class="background-group">
-                <select class="form-control" id="selectBackground" onchange="changeBackgroundValues(this)">
+                <p class="heading1 margin-5">Name</p>
+                <br>
+                <div style="width: 250px; display: inline-block;" class="tooltip1">
+                    <input class="form-control" oninput="fillName(this)" id="nameInput">
+                    <span class="tooltiptext1">Click to give your character a name</span>
+                </div>
+                <div class="tooltip1" style="display: inline-block;">
+                    <button class="btn btn-white margin-5" onclick="getRandomName()" style="display: inline-block;">Random Name</button>
+                    <span class="tooltiptext1">Click to give your character a random name</span>
+                </div>
+            </div>
+            <br>
+            <p class="heading4 padding-10">Background Info</p>
+            <br>
+            <div class="background-group tooltip1">
+                <select style="color: black" class="form-control" id="selectBackground" onchange="changeBackgroundValues(this)">
                     <optgroup label="Background">
                         <option id="acolyte">Acolyte</option>
                         <option>Charlatan</option>
@@ -190,9 +315,11 @@
                         <option>Urchin</option>
                     </optgroup>
                 </select>
+                <span class="tooltiptext1">Click to select a background for your character</span>
             </div>
-            <div class="background-group">
-                <select class="form-control" id="selectPersonalityTrait" onchange="updateBackground(this, 'personalityTrait')">
+            <br>
+            <div class="background-group tooltip1">
+                <select style="color: black" class="form-control" id="selectPersonalityTrait" onchange="updateBackground(this, 'personalityTrait')">
                     <optgroup label="Personality Trait">
                         <option id="pt-1">I idolize a particular hero of my faith, and constantly refer to that person's deeds and example.</option>
                         <option id="pt-2">I can find common ground between the fiercest enemies, epathizing with them and always working toward peace.</option>
@@ -204,9 +331,11 @@
                         <option id="pt-8">I've spent so long in the temple that I jve little practival experience dealing with people in the outside world.</option>
                     </optgroup>
                 </select>
+                <span class="tooltiptext1">Click to select a personality trait for your character</span>
              </div>
-            <div class="background-group">
-                 <select class="form-control" id="selectIdeal" onchange="updateBackground(this, 'ideal')">
+            <br>
+            <div class="background-group tooltip1">
+                 <select style="color: black" class="form-control" id="selectIdeal" onchange="updateBackground(this, 'ideal')">
                      <optgroup label="Ideal">
                         <option id="i-1">Tradition</option>
                         <option id="i-2">Charity</option>
@@ -216,9 +345,11 @@
                         <option id="i-6">Aspiration</option>
                      </optgroup>
                 </select>
+                <span class="tooltiptext1">Click to select an ideal for your character</span>
              </div>
-            <div class="background-group">
-                 <select class="form-control" id="selectBond" onchange="updateBackground(this, 'bond')">
+            <br>
+            <div class="background-group tooltip1">
+                 <select style="color: black" class="form-control" id="selectBond" onchange="updateBackground(this, 'bond')">
                      <optgroup label="Bond">
                         <option id="b-1">I would die to recover an ancient relic of my faith that was lost long ago.</option>
                         <option id="b-2">I will someday get revenge on the corrupt temple hierarchy who branded me a heretic.</option>
@@ -228,9 +359,11 @@
                         <option id="b-6">I seek to preserve a sacred text that my enemies consider heretical and seek to destroy.</option>
                      </optgroup>
                 </select>
+                <span class="tooltiptext1">Click to select a bond for your character</span>
              </div>
-            <div class="background-group">
-                 <select class="form-control" id="selectFlaw" onchange="updateBackground(this, 'flaw')">
+            <br>
+            <div class="background-group tooltip1">
+                 <select style="color: black" class="form-control" id="selectFlaw" onchange="updateBackground(this, 'flaw')">
                      <optgroup label="Flaw">
                         <option id="f-1">I judge others harshly, and myself even more severly.</option>
                         <option id="f-2">I put too much trust in those who weild power within my temple's hierarchy.</option>
@@ -240,9 +373,11 @@
                         <option id="f-6">Once I pick a goal, I become obsessed with it to the detriment of everything else in my life.</option>
                      </optgroup>
                 </select>
+                <span class="tooltiptext1">Click to select a flaw for your character</span>
              </div>
-            <div class="background-group">
-                 <select class="form-control" id="selectAlignment" onchange="fillAlignment(this)">
+            <br>
+            <div class="background-group tooltip1">
+                 <select style="color: black" class="form-control" id="selectAlignment" onchange="fillAlignment(this)">
                      <optgroup label="Alignment">
                         <option>Chaotic Good</option>
                         <option>Chaotic Neutral</option>
@@ -255,73 +390,206 @@
                         <option>Lawful Evil</option>
                      </optgroup>
                 </select>
+                <span class="tooltiptext1">Click to select an alignment for your character</span>
             </div>
+            <br>
+            <div class="background-group tooltip1">
+                <button class="btn btn-white full-width" onclick="getRandomBackground()">Random Background</button>
+                <span class="tooltiptext1">Click to select a random background for your character</span>
+            </div>
+            <br>
         </div>
-        <div>
-            <div class="background-group">
-                <p class="heading1 margin-5" >Name</p>
-                <input class="form-control" oninput="fillName(this)" id="nameInput">
+        <div class="align-right2">
+            <div>
+                <h5>Acolyte</h5>
+                <p class="p-white">
+                    You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, perform ing sacred rites and offering sacrifices in order to conduct worshipers into the presence of the divine. You are not necessarily a cleric-performing sacred rites is not the same thing as channeling divine power. 
+                </p>
+            </div> 
+            <div>
+                <h5>Charlatan</h5>
+                <p class="p-white">
+                    You have always had a way with people. You know what makes them tick, you can tease out their hearts' desires after a few minutes of conversation, and with a few leading questions you can read them like they were children's books. It’s a useful talent, and one that you’re perfectly willing to use for your advantage.
+                </p>
+            </div> 
+            <div>
+                <h5>Crimial</h5>
+                <p class="p-white">
+                    You are an experienced criminal with a history of breaking the law. You have spent a lot of time among other criminals and still have contacts within the criminal underworld. You’re far closer than most people to the world of murder, theft, and violence that pervades the underbelly of civilization, and you have survived up to this point by flouting the rules and regulations of society.
+                </p>
+            </div> 
+            <div>
+                <h5>Entertainer</h5>
+                <p class="p-white">
+                    You thrive in front of an audience. You know how to entrance them, entertain them, and even inspire them. Your poetics can stir the hearts of those who hear you, awakening grief or joy, laughter or anger. Your music raises their spirits or captures their sorrow. Your dance steps captivate, your humor cuts to the quick. Whatever techniques you use, your art is your life.
+                </p>
             </div>
-            <div class="background-group"></div>
-            <div class="background-group"></div>
-            <div class="background-group"></div>
-            <div class="background-group"></div>
-            <div class="background-group">
-                <button class="btn btn-white full-width margin-5" onclick="getRandomBackground()">Random</button>
-            </div>
+            <div>
+                <h5>Folk Hero</h5>
+                <p class="p-white">
+                    You come from a humble social rank, but you are destined for so much more. Already the people of your home village regard you as their champion, and your destiny calls you to stand against the tyrants and monsters that threaten the com m on folk everywhere.
+                </p>
+            </div> 
+            <div>
+                <h5>Guild Artisan</h5>
+                <p class="p-white">
+                    You are a member of an artisan’s guild, skilled in a particular field and closely associated with other artisans. You are a well-established part of the mercantile world, freed by talent and wealth from the constraints of a feudal social order. You learned your skills as an apprentice to a master artisan, under the sponsorship of your guild, until you became a master in your own right.
+                </p>
+            </div> 
+            <div>
+                <h5>Hermit</h5>
+                <p class="p-white">
+                    You lived in seclusion—either in a sheltered community such as a monastery, or entirely alone—for a formative part of your life. In your time apart from the clam or of society, you found quiet, solitude, and perhaps some of the answers you were looking for.
+                </p>
+            </div> 
+            <div>
+                <h5>Noble</h5>
+                <p class="p-white">
+                    You understand wealth, power, and privilege. You carry a noble title, and your family owns land, collects taxes, and wields significant political influence. You might be a pampered aristocrat unfamiliar with work or discomfort, a former merchant just elevated to the nobility, or a disinherited scoundrel with a disproportionate sense of entitlement. Or you could be an honest, hard-working landowner who cares deeply about the people who live and work on your land, keenly aware of your responsibility to them.
+                </p>
+            </div> 
+            <div>
+                <h5>Outlander</h5>
+                <p class="p-white">
+                    You grew up in the wilds, far from civilization and the comforts of town and technology. You’ve witnessed the migration of herds larger than forests, survived weather more extreme than any city-dweller could comprehend, and enjoyed the solitude of being the only thinking creature for miles in any direction. The wilds are in your blood, whether you were a nomad, an explorer, a recluse, a hunter-gatherer, or even a marauder. Even in places where you don’t know the specific features of the terrain, you know the ways of the wild.
+                </p>
+            </div> 
+            <div>
+                <h5>Sage</h5>
+                <p class="p-white">
+                    You spent years learning the lore of the multiverse. You scoured manuscripts, studied scrolls, and listened to the greatest experts on the subjects that interest you. Your efforts have made you a master in your fields of study.
+                </p>
+            </div> 
+            <div>
+                <h5>Sailor</h5>
+                <p class="p-white">
+                    You sailed on a seagoing vessel for years. In that time, you faced down mighty storms, monsters of the deep, and those who wanted to sink your craft to the bottom less depths. Your first love is the distant line of the horizon, but the time has come to try your hand at something new.
+                </p>
+            </div> 
+            <div>
+                <h5>Soldier</h5>
+                <p class="p-white">
+                    War has been your life for as long as you care to remember. You trained as a youth, studied the use of weapons and armor, learned basic survival techniques, including how to stay alive on the battlefield. You might have been part of a standing national army or a mercenary company, or perhaps a member of a local militia w o rose to prominence during a recent war.
+                </p>
+            </div> 
+            <div>
+                <h5>Urchin</h5>
+                <p class="p-white">
+                    You grew up on the streets alone, orphaned, and poor. You had no one to watch over you or to provide for you, so you learned to provide for yourself. You fought fiercely over food and kept a constant watch out for other desperate souls who might steal from you. You slept on rooftops and in alleyways, exposed to the elements, and endured sickness without the advantage of medicine or a place to recuperate. You’ve survived despite all odds, and did so through cunning, strength, speed, or some com bination of each.
+                </p>
+            </div> 
         </div>
     </div>
+        
+        
       <div id="class-tab" class="tab hide">
-          <div>
-            <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)" style="background-color: #99ffcc">Barbarian</button>
+          <p class="text-white">Please select a class from one of the following options. If your can't decide select "Random" and we will pick one for you. You can also change it later if you change your mind.</p>
+          <div class="float-left">
+            <div class="class-group tooltip1">
+                <p class="heading4">Class</p>
+                <select style="color: black" id="selectClass" class="form-control" onfocus="selectThisClass(this);" onchange="selectThisClass(this)">
+                    <option>Barbarian</option>
+                    <option>Bard</option>
+                    <option>Cleric</option>
+                    <option>Druid</option>
+                    <option>Fighter</option>
+                    <option>Monk</option>
+                    <option>Paladin</option>
+                    <option>Ranger</option>
+                    <option>Rogue</option>
+                    <option>Sorcerer</option>
+                    <option>Warlock</option>
+                    <option>Wizard</option>
+                </select>
+                <span class="tooltiptext1">Click to select a class for your character</span>
             </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Cleric</button>
-            </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Fighter</button>
-            </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Paladin</button>
-            </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Rogue</button>
-            </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Warlock</button>
-            </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Random</button>
-            </div>
-          </div>
-          <div>
-          <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Bard</button>
-            </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Druid</button>
-            </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Monk</button>
-            </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Ranger</button>
-            </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Sorcerer</button>
-            </div>
-              <div class="class-group">
-                <button class="btn btn-white full-width" onclick="selectThisClass(this)">Wizard</button>
-            </div>
-            <div class="class-group">
+            <div class="class-group tooltip1">
+                <button class="btn btn-white full-width" onClick="selectRandomClass(this);" style="margin-top:5px;">Random</button>
+                <span class="tooltiptext1">Click to select a random class for your character</span>
             </div>
           </div>
+          <div class="align-right1">
+            <div>
+                <h5>Barbarian</h5>
+                <p class="p-white">
+                    A fierce warrior of primitive background who can enter a battle rage.
+                </p>
+            </div> 
+            <div>
+                <h5>Bard</h5>
+                <p class="p-white">
+                    An inspiring magician whose power echoes the music of creation.
+                </p>
+            </div> 
+            <div>
+                <h5>Cleric</h5>
+                <p class="p-white">
+                    A priestly champion who wields divine magic in service of a higher power.
+                </p>
+            </div> 
+            <div>
+                <h5>Druid</h5>
+                <p class="p-white">
+                    A priest of the Old Faith, wielding the powers of nature— moonlight and plant growth, fire and lightning— and adopting animal forms.
+                </p>
+            </div> 
+            <div>
+                <h5>Fighter</h5>
+                <p class="p-white">
+                    A master of martial combat, skilled with a variety of weapons and armor.
+                </p>
+            </div> 
+            <div>
+                <h5>Monk</h5>
+                <p class="p-white">
+                    An master of martial arts, harnessing the power of the body in pursuit of physical and spiritual perfection.
+                </p>
+            </div> 
+            <div>
+                <h5>Paladin</h5>
+                <p class="p-white">
+                    A holy warrior bound to a sacred oath.
+                </p>
+            </div> 
+            <div>
+                <h5>Ranger</h5>
+                <p class="p-white">
+                    A warrior who uses martial prowess and nature magic to combat threats on the edges of civilization.
+                </p>
+            </div>
+            <div>
+                <h5>Rogue</h5>
+                <p class="p-white">
+                    A scoundrel who uses stealth and trickery to overcome obstacles and enemies.
+                </p>
+            </div> 
+            <div>
+                <h5>Sorcerer</h5>
+                <p class="p-white">
+                    A spellcaster who draws on inherent magic from a gift or bloodline.
+                </p>
+            </div> 
+            <div>
+                <h5>Warlock</h5>
+                <p class="p-white">
+                    A wielder of magic that is derived from a bargain with an extraplanar entity.
+                </p>
+            </div> 
+            <div>
+                <h5>Wizard</h5>
+                <p class="p-white">
+                    A scholarly magic-user capable of manipulating the structures of reality.
+                </p>
+            </div> 
+         </div>
         </div>
         
          <div id="proficiencies-tab" class="tab hide">
             <p class="heading2" id="prof-instructions">Choose two addtional skills:</p>
-            <p class="heading2" id="prof-warning" style="color:#99ffcc;visibility:hidden">More than the recomended number of skills selected!</p>
+            <div id="prof-warning" class="tooltip2" style="visibility:hidden;display:inline-block;">
+                <i class="material-icons" style="font-size:20px;color:orange;font-weight: bolder">error_outline</i>
+                <span class="tooltiptext2">More than the recomended number of skills selected!</span>
+            </div>
             <div class="width-50">
                 <div class="proficiencies-group">
                     <div class="form-check prof-skill" id="prof-acrobatics">
@@ -392,7 +660,10 @@
         <div id="attackSpellcasting-tab" class="tab hide">
             <div id="cantrips" class="stats width-25">
              <p class="heading2" id="cantrip-instructions">There are no cantrips for this class:</p>
-            <p class="heading2" id="cantrip-warning" style="color:#99ffcc;display: none">More than the recomended number of cantrips selected!</p>
+            <div id="cantrip-warning" class="tooltip2" style="visibility:hidden;display: inline-block">
+              <i class="material-icons" style="font-size:20px;color:orange;font-weight: bolder">error_outline</i>
+                <span class="tooltiptext2">More than the recomended number of cantrips selected!</span>
+            </div>
             <div>
                 <div class="cantrip-group">
                     <div class="form-check cantrip-skill" id="cantrip-acidSplash">
@@ -440,11 +711,11 @@
                     <div class="form-check cantrip-skill" id="cantrip-poisonSpray">
                         <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="poisonSpray" disabled><p class="heading2 disabled">Poison Spray</p>
                     </div>
+                </div>
+                <div class="cantrip-group">
                     <div class="form-check cantrip-skill" id="cantrip-prestidigitation">
                         <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="prestidigitation" disabled><p class="heading2 disabled">Prestidigitation</p>
                     </div>
-                </div>
-                <div class="cantrip-group">
                     <div class="form-check cantrip-skill" id="cantrip-produceFlame">
                         <input class="form-check-input" type="checkbox" onchange="selectCantrip(this)" value="produceFlame" disabled><p class="heading2 disabled">Produce Flame</p>
                     </div>
@@ -489,7 +760,10 @@
             </div>
             <div id="spells" class="stats width-68">
              <p class="heading2" id="spell-instructions">There are no spells for this class:</p>
-            <p class="heading2" id="spell-warning" style="color:#99ffcc;visibility: hidden;">More than the recomended number of spells selected!</p>
+            <div id="spell-warning" class="tooltip2" style="visibility:hidden;display: inline-block">
+              <i class="material-icons" style="font-size:20px;color:orange;font-weight: bolder">error_outline</i>
+                <span class="tooltiptext2">More than the recomended number of spells selected!</span>
+            </div>
             <div>
                 <div class="spell-group">
                     <div class="form-check spell-skill" id="spell-alarm">
@@ -581,11 +855,11 @@
                     <div class="form-check spell-skill" id="spell-guidingBolt">
                         <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="guidingBolt" disabled><p class="heading2 disabled">Guiding Bolt</p>
                     </div>
+                </div>
+                <div class="spell-group">
                     <div class="form-check spell-skill" id="spell-healingWord">
                         <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="healingWord" disabled><p class="heading2 disabled">Healing Word</p>
                     </div>
-                </div>
-                <div class="spell-group">
                     <div class="form-check spell-skill" id="spell-hellishRebuke">
                         <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="hellishRebuke" disabled><p class="heading2 disabled">Hellish Rebuke</p>
                     </div>
@@ -625,14 +899,14 @@
                     <div class="form-check spell-skill" id="spell-rayOfSickness">
                         <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="rayOfSickness" disabled><p class="heading2 disabled">Ray of Sickness</p>
                     </div>
+                </div>
+                <div class="spell-group">
                     <div class="form-check spell-skill" id="spell-sanctuary">
                         <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="sanctuary" disabled><p class="heading2 disabled">Sanctuary</p>
                     </div>
                     <div class="form-check spell-skill" id="spell-shield">
                         <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="shield" disabled><p class="heading2 disabled">Shield</p>
                     </div>
-                </div>
-                <div class="spell-group">
                     <div class="form-check spell-skill" id="spell-shieldOfFaith">
                         <input class="form-check-input" type="checkbox" onchange="selectSpell(this)" value="shieldOfFaith" disabled><p class="heading2 disabled">Shield of Faith</p>
                     </div>
@@ -669,21 +943,12 @@
                     <div class="form-check" style="visibility: hidden">
                         <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
                     </div>
-                    <div class="form-check" style="visibility: hidden">
-                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
-                    </div>
-                    <div class="form-check" style="visibility: hidden">
-                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
-                    </div>
-                    <div class="form-check" style="visibility: hidden">
-                        <input class="form-check-input" type="checkbox" disabled><p class="heading2 disabled">Nothing</p>
-                    </div>
                 </div>
             </div> 
             </div>
             <div id="equipment">
                 <br>
-                <div id="barbarian-equipment" class="equipment-by-class">
+                <div id="barbarian-equipment" class="equipment-by-class" style="display: block;">
                     <div id="barbarian-option-1">
                         <p class="heading3">Choose one of the following weapons:</p>
                         <div class="form-check form-check-inline">
@@ -697,7 +962,7 @@
                                 <input type="radio" class="form-check-input" name="barbarian-option-1" 
                                        value="Battleaxe" onchange="selectWeaponOption('barbarian-martial-melee-select', this, 1)"><span>Martial Melee Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1);" id="barbarian-martial-melee-select" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1);" id="barbarian-martial-melee-select" disabled>
                                 <optgroup label="Martial Melee Weapon">
                                     <option>Battleaxe</option>
                                     <option>Flail</option>
@@ -732,7 +997,7 @@
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="barbarian-option-2" value="Crossbow, light" onchange="selectWeaponOption('barbarian-simple-weapon-select', this, 2)"><span>Simple Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2)" id="barbarian-simple-weapon-select" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2)" id="barbarian-simple-weapon-select" disabled>
                                 <optgroup label="Simple Ranged Weapon">
                                     <option>Crossbow, light</option>
                                     <option>Dart</option>
@@ -782,7 +1047,7 @@
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="bard-option-1" value="Crossbow, light" onchange="selectWeaponOption('bard-simple-weapon-select', this, 1)"><span>Simple Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="bard-simple-weapon-select" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="bard-simple-weapon-select" disabled>
                                 <optgroup label="Simple Ranged Weapon">
                                     <option>Crossbow, light</option>
                                     <option>Dart</option>
@@ -856,7 +1121,7 @@
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="cleric-option-1" value="Crossbow, light" onchange="selectWeaponOption('cleric-simple-weapon-select', this, 1)"><span>Simple Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="cleric-simple-weapon-select" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="cleric-simple-weapon-select" disabled>
                                 <optgroup label="Simple Ranged Weapon">
                                     <option>Crossbow, light</option>
                                     <option>Dart</option>
@@ -884,13 +1149,13 @@
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="cleric-option-2" value="Scale Mail" checked
-                                   onchange="updateEquipmentList(this.value, 2)()"><span>Scale Mail</span>
+                                   onchange="updateEquipmentList(this.value, 2);"><span>Scale Mail</span>
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="cleric-option-2" value="Leather Armor"
-                                   onchange="updateEquipmentList(this.value, 2)"><span>Leather Armor</span>
+                                   onchange="updateEquipmentList(this.value, 2);"><span>Leather Armor</span>
                             </label>
                         </div>
                     </div>
@@ -931,7 +1196,7 @@
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="druid-option-1" value="Crossbow, light" onchange="selectWeaponOption('druid-simple-weapon-select', this, 1)"><span>Simple Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="druid-simple-weapon-select" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="druid-simple-weapon-select" disabled>
                                 <optgroup label="Simple Ranged Weapon">
                                     <option>Crossbow, light</option>
                                     <option>Dart</option>
@@ -967,7 +1232,7 @@
                                 <input type="radio" class="form-check-input" name="druid-option-2" 
                                        value="Battleaxe" onchange="selectWeaponOption('druid-martial-melee-select', this, 2)"><span>Martial Melee Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="druid-martial-melee-select" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="druid-martial-melee-select" disabled>
                                 <optgroup label="Martial Melee Weapon">
                                     <option>Battleaxe</option>
                                     <option>Flail</option>
@@ -1020,7 +1285,7 @@
                             <label class="form-check-label">
                                 <span>Martial Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="fighter-martial-weapon-select-1">
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="fighter-martial-weapon-select-1">
                                 <optgroup label="Martial Ranged Weapon">
                                     <option>Blowgun</option>
                                     <option>Crossbow, hand</option>
@@ -1063,7 +1328,7 @@
                                 <input type="radio" class="form-check-input" name="fighter-option-3" 
                                        value="Blowgun" onchange="selectWeaponOption('fighter-martial-weapon-select-2', this, 3)"><span>Martial Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 3);" id="fighter-martial-weapon-select-2" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 3);" id="fighter-martial-weapon-select-2" disabled>
                                 <optgroup label="Martial Ranged Weapon">
                                     <option>Blowgun</option>
                                     <option>Crossbow, hand</option>
@@ -1150,7 +1415,7 @@
                                 <input type="radio" class="form-check-input" name="monk-option-2" 
                                        value="Crossbow, light" onchange="selectWeaponOption('monk-simple-weapon-select', this, 2)"><span>Simple Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="monk-simple-weapon-select" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="monk-simple-weapon-select" disabled>
                                 <optgroup label="Simple Ranged Weapon">
                                     <option>Crossbow, light</option>
                                     <option>Dart</option>
@@ -1202,7 +1467,7 @@
                             <label class="form-check-label">
                                 <span>Martial Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="paladin-martial-weapon-select-1">
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 2);" id="paladin-martial-weapon-select-1">
                                 <optgroup label="Martial Ranged Weapon">
                                     <option>Blowgun</option>
                                     <option>Crossbow, hand</option>
@@ -1245,7 +1510,7 @@
                                 <input type="radio" class="form-check-input" name="paladin-option-3" 
                                        value="Blowgun" onchange="selectWeaponOption('paladin-martial-weapon-select-2', this, 3)"><span>Martial Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 3);" id="paladin-martial-weapon-select-2" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 3);" id="paladin-martial-weapon-select-2" disabled>
                                 <optgroup label="Martial Ranged Weapon">
                                     <option>Blowgun</option>
                                     <option>Crossbow, hand</option>
@@ -1288,7 +1553,7 @@
                                 <input type="radio" class="form-check-input" name="paladin-option-4" 
                                        value="Club" onchange="selectWeaponOption('paladin-simple-melee-select', this, 4)"><span>Simple Melee Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 4);" id="paladin-simple-melee-select" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 4);" id="paladin-simple-melee-select" disabled>
                                 <optgroup label="Simple Melee Weapon">
                                     <option>Club</option>
                                     <option>Dagger</option>
@@ -1355,7 +1620,7 @@
                                 <input type="radio" class="form-check-input" name="ranger-option-3" 
                                        value="Club" onchange="selectWeaponOption('ranger-simple-melee-select-1', this, 3);document.getElementById('equip-list-5').style.visibility = 'visible';selectWeaponOption('ranger-simple-melee-select-2', this, 5)"><span>Simple Melee Weapon (2)&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 3);" id="ranger-simple-melee-select-1" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 3);" id="ranger-simple-melee-select-1" disabled>
                                 <optgroup label="Simple Melee Weapon">
                                     <option>Club</option>
                                     <option>Dagger</option>
@@ -1370,7 +1635,7 @@
                                     <option>Unarmed Strike</option>
                                 </optgroup>
                             </select>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 5);" id="ranger-simple-melee-select-2" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 5);" id="ranger-simple-melee-select-2" disabled>
                                 <optgroup label="Simple Melee Weapon">
                                     <option>Club</option>
                                     <option>Dagger</option>
@@ -1465,7 +1730,7 @@
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="sorcerer-option-1" value="Crossbow, light" onchange="selectWeaponOption('sorcerer-simple-weapon-select', this, 1)"><span>Simple Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="sorcerer-simple-weapon-select" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="sorcerer-simple-weapon-select" disabled>
                                 <optgroup label="Simple Ranged Weapon">
                                     <option>Crossbow, light</option>
                                     <option>Dart</option>
@@ -1538,7 +1803,7 @@
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="warlock-option-1" value="Crossbow, light" onchange="selectWeaponOption('warlock-simple-weapon-select-1', this, 1)"><span>Simple Weapon&nbsp;</span>
                             </label>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="warlock-simple-weapon-select-1" disabled>
+                            <select style="color: black" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 1)" id="warlock-simple-weapon-select-1" disabled>
                                 <optgroup label="Simple Ranged Weapon">
                                     <option>Crossbow, light</option>
                                     <option>Dart</option>
@@ -1594,7 +1859,7 @@
                     <div id="warlock-option-4">
                         <p class="heading3">Choose one of the following weapons:</p>
                             <span>Simple Weapon&nbsp;</span>
-                            <select class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 4)" id="warlock-simple-weapon-select-2">
+                            <select style="color: black; display: inline-block" class="form-control form-control-sm width-px" onchange="updateEquipmentList(this.value, 4)" id="warlock-simple-weapon-select-2">
                                 <optgroup label="Simple Ranged Weapon">
                                     <option>Crossbow, light</option>
                                     <option>Dart</option>
@@ -1679,346 +1944,410 @@
                 </div>
             </div>
         </div>
-        <br>
-        <br>
-    <div class="">
-        <div class="line">
-            <p id="name"></p>
+        
+    <div id="home-tab" class="tab">
+        <div class="line tooltip1" onclick="showTab(document.getElementById('bg-personality'), 'background')">
+            <p id="name">&nbsp;</p>
             <hr>
-            <p>Name</p>
+            <p >Name</p>
+            <span class="tooltiptext1">Click here to give your character a name</span>
         </div>
-        <div class="line">
+        <div class="line tooltip1" onclick="showTab(document.getElementById('bg-race'), 'race')">
             <p id="race">Dragonborn</p>
             <hr>
             <p>Race</p>
+            <span class="tooltiptext1">Click here to select your character's race</span>
         </div>
-        <div class="line">
+        <div class="line tooltip1" onclick="showTab(document.getElementById('bg-class'), 'class')">
             <p id="class">Barbarian</p>
             <hr>
             <p>Class</p>
+            <span class="tooltiptext1">Click here to select your character's class</span>
         </div>
-        <div class="line">
-            <p id="experience"></p>
-            <hr>
-            <p>Experience</p>
-        </div>
-        <div class="line">
+        <div class="line tooltip1" onclick="showTab(document.getElementById('bg-personality'), 'background')">
             <p id="alignment">Chaotic Good</p>
             <hr>
             <p>Alignment</p>
+            <span class="tooltiptext1">Click here to select your character's alignment</span>
         </div>
         
-        <div>
+        <div onclick="showTab(document.getElementById('bg-abilityScores'), 'abilityScores')">
             <div>
-                <div class="heading"></div>
-                <p class="heading">Strength</p>
-                <p class="heading">Dexterity</p>
-                <p class="heading">Constitution</p>
-                <p class="heading">Inteligence</p>
-                <p class="heading">Wisdom</p>
-                <p class="heading">Charisma</p>
-                <p class="heading">Armor Class</p>
-                <p class="heading">Initiative</p>
-                <p class="heading">Speed</p>
+                <div class="heading tooltip1">
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </div>
+                <p class="heading tooltip1">Strength
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <p class="heading tooltip1" style="padding-left: 10px;">Dexterity
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <p class="heading tooltip1">Constitution
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <p class="heading tooltip1" style="padding-left: 5px;">Inteligence
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <p class="heading tooltip1" style="padding-left: 10px;">Wisdom
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <p class="heading tooltip1">Charisma
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <p class="heading tooltip1">Armor Class
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <p class="heading tooltip1" style="padding-left: 10px;">Initiative
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <p class="heading tooltip1" style="padding-left: 10px;">Speed
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
             </div>
-            <div>
-                <p class="heading">Stat</p>
-                <div class="border border-dark box">
-                    <p id="strength-stat">15</p>
+            <div >
+                <p class="heading tooltip1">Stat
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="strength-stat" class="mg-top">15</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="dexterity-stat">14</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="dexterity-stat" class="mg-top">14</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="constitution-stat">13</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="constitution-stat"  class="mg-top">13</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="inteligence-stat">12</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="inteligence-stat"  class="mg-top">12</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="wisdom-stat">10</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="wisdom-stat"  class="mg-top">10</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="charisma-stat">8</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="charisma-stat"  class="mg-top">8</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="armorClass-stat">&nbsp;</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="armorClass-stat"  class="mg-top">12</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="initiative-stat">&nbsp;</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="initiative-stat"  class="mg-top">2</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-               <div class="border border-dark box">
-                    <p id="speed-stat">&nbsp;</p>
+               <div class="border border-dark box center-text tooltip1">
+                    <p id="speed-stat"  class="mg-top">30</p>
+                   <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
             </div>
              <div>
-                <p class="heading">Mod</p>
-               <div class="border border-dark box">
-                    <p id="strength-mod">2</p>
+                <p class="heading tooltip1">Mod
+                 <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+               <div class="border border-dark box center-text tooltip1">
+                    <p id="strength-mod"  class="mg-top">2</p>
+                   <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="dexterity-mod">2</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="dexterity-mod"  class="mg-top">2</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="constitution-mod">1</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="constitution-mod" class="mg-top">1</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="inteligence-mod">1</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="inteligence-mod"  class="mg-top">1</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="wisdom-mod">0</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="wisdom-mod"  class="mg-top">0</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <div class="border border-dark box">
-                    <p id="charisma-mod">-1</p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p id="charisma-mod"  class="mg-top">-1</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
                 </div>
-                <p class="box">&nbsp;</p>
-                <p class="box">&nbsp;</p>
-                <p class="box">&nbsp;</p>
+                <p class="box tooltip1">&nbsp;
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                 </p>
+                <p class="box tooltip1">&nbsp;
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                 </p>
+                <p class="box tooltip1">&nbsp;
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                 </p>
             </div>
             <div>
-                <p class="heading headingLeft">Saving Throws</p>
-                <p class="border border-dark box">&nbsp;</p>
-                <p class="border border-dark box">&nbsp;</p>
-                <p class="border border-dark box">&nbsp;</p>
-                <p class="border border-dark box">&nbsp;</p>
-                <p class="border border-dark box">&nbsp;</p>
-                <p class="border border-dark box">&nbsp;</p>
-                <p class="box">&nbsp;</p>
-                <p class="box">&nbsp;</p>
-                <p class="box">&nbsp;</p>
+                <p class="heading headingLeft tooltip1">
+                    Saving Throws 
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <div class="border border-dark box center-text tooltip1">
+                    <p class="mg-top" id="strength-st" >4</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </div>
+                <div class="border border-dark box center-text tooltip1">
+                    <p class="mg-top" id="dexterity-st">2</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </div>
+                <div class="border border-dark box center-text tooltip1">
+                    <p class="mg-top" id="constitution-st">3</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </div>
+                <div class="border border-dark box center-text tooltip1">
+                    <p class="mg-top" id="inteligence-st">1</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </div>
+                <div class="border border-dark box center-text tooltip1">
+                    <p class="mg-top" id="wisdom-st">0</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </div>
+                <div class="border border-dark box center-text tooltip1">
+                    <p class="mg-top" id="charisma-st">-1</p>
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </div>
+                <p class="box tooltip1">&nbsp;
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <p class="box tooltip1">&nbsp;
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
+                <p class="box tooltip1">&nbsp;
+                    <span class="tooltiptext1">Click here to update your character's ability scores</span>
+                </p>
             </div>
         </div>
         <div>
             <div>
-                <div class="header5 center-text">
-                    <p>Skills</p>
+                <div class="header5 center-text tooltip1" onclick="showTab(document.getElementById('bg-skills'), 'proficiencies')">
+                    <p class="peach">Skills</p>
+                    <span class="tooltiptext1">Click here to update your character's skills</span>
                 </div>
-                 <div class="header5 center-text">
-                    <p>Attack &amp; Spellcasting</p>
+                 <div class="header5 center-text tooltip1" onclick="showTab(document.getElementById('bg-attackSpellcasting'), 'attackSpellcasting')">
+                    <p class="peach">Attack &amp; Spellcasting</p>
+                    <span class="tooltiptext1">Click here to update your character's spells</span>
                 </div>
-                 <div class="header5">
-                    <p>Hit Points:</p>
+                 <div class="header5 center-text tooltip1" onclick="showTab(document.getElementById('bg-attackSpellcasting'), 'attackSpellcasting')">
+                    <p class="peach">Equipment</p>
+                     <span class="tooltiptext1">Click here to update your character's equipment</span>
                 </div>
-                 <div class="header5 center-text">
-                    <p>Background</p>
+                 <div class="header5 center-text tooltip1" onclick="showTab(document.getElementById('bg-personality'), 'background')">
+                    <p class="peach">Background</p>
+                     <span class="tooltiptext1">Click here to update your character's background</span>
                 </div>
             </div>
             <div style="display: flex;">
-            <div class="border border-dark boxBig">
+            <div class="border border-dark boxBig tooltip1" onclick="showTab(document.getElementById('bg-skills'), 'proficiencies')">
                 <div class="skill-row" id="acrobatics">
-                    <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <i class="fa fa-circle-o color"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">2</p>
                     <p class="skill">Acrobatics</p>
                 </div>
                 <div class="skill-row" id="animalHandling">
-                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                     <i class="fa fa-circle-o color"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">0</p>
                     <p class="skill">Animal Handling</p>
                 </div>
                 <div class="skill-row" id="arcana">
-                    <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <i class="fa fa-circle-o color"></i>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">1</p>
                     <p class="skill">Arcana</p>
                 </div>
                 <div class="skill-row" id="athletics">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">2</p>
                     <p class="skill">Athletics</p>
                 </div>
                 <div class="skill-row" id="deception">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">-1</p>
                     <p class="skill">Deception</p>
                 </div>
                 <div class="skill-row" id="history">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">1</p>
                     <p class="skill">History</p>
                 </div>
                 <div class="skill-row" id="insight">
                     <i class="fa fa-circle"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">2&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">2</p>
                     <p class="skill">Insight</p>
                 </div>
                 <div class="skill-row" id="intimidation">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">-1</p>
                     <p class="skill">Initmidation</p>
                 </div>
                 <div class="skill-row" id="investigation">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">1</p>
                     <p class="skill">Investigation</p>
                 </div>
                 <div class="skill-row" id="medicine">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">0</p>
                     <p class="skill">Medicine</p>
                 </div>
                 <div class="skill-row" id="nature">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">1</p>
                     <p class="skill">Nature</p>
                 </div>
                 <div class="skill-row" id="perception">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">0</p>
                     <p class="skill">Perception</p>
                 </div>
                 <div class="skill-row" id="performance">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">-1</p>
                     <p class="skill">Performance</p>
                 </div>
                 <div class="skill-row" id="persuasion">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">-1</p>
                     <p class="skill">Persuasion</p>
                 </div>
                 <div class="skill-row" id="religion">
                     <i class="fa fa-circle"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">1&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">3</p>
                     <p class="skill">Religion</p>
                 </div>
                 <div class="skill-row" id="slightOfHand">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">2</p>
                     <p class="skill">Slight of Hand</p>
                 </div>
                 <div class="skill-row" id="stealth">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">2</p>
                     <p class="skill">Stealth</p>
                 </div>
                 <div class="skill-row" id="survivial">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level ">&nbsp;&nbsp;&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">0</p>
                     <p class="skill">Survival</p>
                 </div >
+                <span class="tooltiptext1">Click here to update your character's skills</span>
             </div>
             
-            <div class="border border-dark boxBig" id="cantripsSpellsEct">
+            <div class="border border-dark boxBig tooltip1" onclick="showTab(document.getElementById('bg-attackSpellcasting'), 'attackSpellcasting')" id="cantripsSpellsEct">
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-1">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-2">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-3">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-4">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-5">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-6">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-7">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-8">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-9">
                     <i class="fa fa-circle-o"></i>
-                   <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                   <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-10">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-11">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-12">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-13">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-14">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-15">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0  skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-16">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-17">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
                 <div class="cantripsSpellsEct-row" id="cantripsSpellsEct-18">
                     <i class="fa fa-circle-o"></i>
-                    <p class="border border-top-0 border-left-0 border-right-0 skill-level ">&nbsp;</p>
+                    <p class="border border-top-0 border-left-0 border-right-0 border-dark skill-level center-text">&nbsp;</p>
                     <p class="skill"></p>
                 </div>
+                <span class="tooltiptext1">Click here to update your character's spells</span>
             </div>
-            <div id="column-3" class="boxBig">
-                <p>Death Saving Throws</p>
-                <div class="border border-dark">
-                    <div>
-                        <p class="skill dts">Successes:</p>
-                        <img class="image" src="images/marks.jpg">
-                    </div>
-                    <div>
-                        <p class="skill dts">Failures:</p>
-                        <img class="image" src="images/marks.jpg">
-                    </div>
+                
+            <div id="column-3" class="border border-dark boxBig tooltip1" id="equip" onclick="showTab(document.getElementById('bg-attackSpellcasting'), 'attackSpellcasting')">
+                <div class="skill-row">
+                    <li id="equip-list-1" class='background-info'>Greataxe</li>
+                    <li id="equip-list-2" class='background-info'>Handaxe (2)</li>
+                    <li id="equip-list-3" class='background-info'>Explorer's Pack</li>
+                    <li id="equip-list-4" class='background-info'>Javelin (4)</li>
+                    <li id="equip-list-5" class='background-info' style="visibility: hidden;"></li>
+                    <li id="equip-list-6" class='background-info' style="visibility: hidden;"></li>
+                    <li id="equip-list-7" class='background-info' style="visibility: hidden;"></li>
+                    <li id="equip-list-8" class='background-info' style="visibility: hidden;"></li>
+                    <li id="equip-list-9" class='background-info' style="visibility: hidden;"></li>
+                    <li id="equip-list-10" class='background-info' style="visibility: hidden;"></li>
                 </div>
-                <br>
-                <p>Equipment</p>
-                <div class="border border-dark" id="equip">
-                    <div class="skill-row">
-                        <li id="equip-list-1" class='background-info'>Greataxe</li>
-                        <li id="equip-list-2" class='background-info'>Handaxe (2)</li>
-                        <li id="equip-list-3" class='background-info'>Explorer's Pack</li>
-                        <li id="equip-list-4" class='background-info'>Javelin (4)</li>
-                        <li id="equip-list-5" class='background-info' style="visibility: hidden;"></li>
-                        <li id="equip-list-6" class='background-info' style="visibility: hidden;"></li>
-                        <li id="equip-list-7" class='background-info' style="visibility: hidden;"></li>
-                        <li id="equip-list-8" class='background-info' style="visibility: hidden;"></li>
-                        <li id="equip-list-9" class='background-info' style="visibility: hidden;"></li>
-                        <li id="equip-list-10" class='background-info' style="visibility: hidden;"></li>
-                    </div>
-                </div>
+                <span class="tooltiptext1">Click here to update your character's equipment</span>
             </div>
-            <div class="border border-dark boxBig" id="backgroundBox">
+                
+            <div class="border border-dark boxBig tooltip1" onclick="showTab(document.getElementById('bg-personality'), 'background')" id="backgroundBox">
                 <div class='skill-row'>
                     <li class='background-info' id="background">Acolyte</li>
                     <li class='background-info' id="personalityTrait">I idolize a particular hero of my faith, and constantly refer to that person's deeds and example.</li>
@@ -2027,6 +2356,7 @@
                     <li class='background-info' id="flaw">I judge others harshly, and myself even more severly.</li>
                 </div>
                 <br>
+                <span class="tooltiptext1">Click here to update your character's background</span>
             </div>
             </div>
         </div>
@@ -2039,6 +2369,7 @@
     <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="javascript/popper.sdx"></script>
     <script src="javascript/bootstrap.sdx"></script>
+    <script src="javascript/popper.min.js"></script>
   
 
 </div></body></html>
